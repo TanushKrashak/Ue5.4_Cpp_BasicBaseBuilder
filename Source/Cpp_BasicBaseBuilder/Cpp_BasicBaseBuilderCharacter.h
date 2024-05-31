@@ -7,6 +7,7 @@
 #include "Logging/LogMacros.h"
 #include "Cpp_BasicBaseBuilderCharacter.generated.h"
 
+// Forward Declarations
 class USpringArmComponent;
 class UCameraComponent;
 class UInputMappingContext;

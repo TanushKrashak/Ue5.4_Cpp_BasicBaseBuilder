@@ -13,8 +13,6 @@
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
-//////////////////////////////////////////////////////////////////////////
-// ACpp_BasicBaseBuilderCharacter
 
 ACpp_BasicBaseBuilderCharacter::ACpp_BasicBaseBuilderCharacter()
 {
@@ -89,7 +87,6 @@ void ACpp_BasicBaseBuilderCharacter::SetupPlayerInputComponent(UInputComponent* 
 	}
 }
 
-
 void ACpp_BasicBaseBuilderCharacter::Move(const FInputActionValue& Value)
 {
 	// input is a Vector2D
@@ -112,7 +109,6 @@ void ACpp_BasicBaseBuilderCharacter::Move(const FInputActionValue& Value)
 		AddMovementInput(RightDirection, MovementVector.X);
 	}
 }
-
 void ACpp_BasicBaseBuilderCharacter::Look(const FInputActionValue& Value)
 {
 	// input is a Vector2D
