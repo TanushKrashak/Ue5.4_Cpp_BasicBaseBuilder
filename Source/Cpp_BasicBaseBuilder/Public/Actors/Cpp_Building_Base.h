@@ -41,7 +41,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Building")
 	void DestroyInstance(FVector HitPoint);
 
-
+	
 	
 
 	

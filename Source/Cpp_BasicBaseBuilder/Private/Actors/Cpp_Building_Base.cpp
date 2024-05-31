@@ -5,6 +5,7 @@
 #include "Components/InstancedStaticMeshComponent.h"
 
 
+
 ACpp_Building_Base::ACpp_Building_Base() {
 	PrimaryActorTick.bCanEverTick = false;
 	
@@ -25,6 +26,14 @@ void ACpp_Building_Base::BeginPlay() {
 		MeshLocation.Z += 250;
 
 		MeshTransform.SetLocation(MeshLocation);
+	}
+}
+
+void ACpp_Building_Base::DestroyInstance(FVector HitPoint) {
+	const TArray<int32> HitIndexes = FoundationInstancedMesh->GetInstancesOverlappingSphere(HitPoint, 1.0f);
+
+	if (HitIndexes.Num() > 0) {
+		FoundationInstancedMesh->RemoveInstance(HitIndexes[0]);
 	}
 }
 
