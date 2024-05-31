@@ -7,7 +7,7 @@
 #include "Cpp_Building_Base.generated.h"
 
 // Forward Declarations
-
+class UInstancedStaticMeshComponent;
 
 UCLASS()
 class CPP_BASICBASEBUILDER_API ACpp_Building_Base : public AActor
@@ -21,6 +21,8 @@ protected:
 	//====================================================================================================================
 	// PROPERTIES & VARIABLES
 	//====================================================================================================================
+	UPROPERTY(BlueprintReadOnly, Category = "Building")
+	UInstancedStaticMeshComponent* FoundationInstancedMesh;
 
 	//====================================================================================================================
 	// FUNCTIONS
