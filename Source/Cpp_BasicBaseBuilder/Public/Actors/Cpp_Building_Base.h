@@ -43,7 +43,7 @@ public:
 		
 	UFUNCTION(BlueprintCallable, Category = "Building")
 	FTransform GetInstancedSocketTransform(UInstancedStaticMeshComponent* InstancedComp, int32 InstanceIndex, const FName& SocketName, 
-										   bool WorldSpace = false, bool& Success);
+										   bool& Success, bool WorldSpace = false);
 
 	
 	
