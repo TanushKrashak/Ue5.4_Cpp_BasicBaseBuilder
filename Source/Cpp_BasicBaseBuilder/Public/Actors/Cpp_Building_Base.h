@@ -21,7 +21,7 @@ protected:
 	//====================================================================================================================
 	// PROPERTIES & VARIABLES
 	//====================================================================================================================
-	UPROPERTY(EditDefaultsOnly, Category = "Building")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Building")
 	UInstancedStaticMeshComponent* FoundationInstancedMesh;
 
 	//====================================================================================================================
