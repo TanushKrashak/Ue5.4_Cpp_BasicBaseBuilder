@@ -40,9 +40,14 @@ void ACpp_Building_Base::DestroyInstance(FVector HitPoint) {
 FTransform ACpp_Building_Base::GetInstancedSocketTransform(UInstancedStaticMeshComponent* InstancedComp, int32 InstanceIndex, const FName& SocketName) {
 	// Check if the instanced component & instance index are valid
 	if (InstancedComp && InstancedComp->IsValidInstance(InstanceIndex)) {
+		UE_LOG(LogTemp, Warning, TEXT("Instance Transform Location: "));
 		FTransform InstanceTransform = FTransform();
+		// Log Instance Transform Location
+		
+		
 		// Set the instance transform based on the instance index
 		InstancedComp->GetInstanceTransform(InstanceIndex, InstanceTransform);
+
 		// RTS_Component is used to get the socket transform in the component space
 		FTransform SocketTransform = InstancedComp->GetSocketTransform(SocketName, RTS_Component);
 
