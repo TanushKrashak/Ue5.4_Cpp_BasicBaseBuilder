@@ -37,10 +37,11 @@ void ACpp_Building_Base::DestroyInstance(FVector HitPoint) {
 	}
 }
 
-FTransform ACpp_Building_Base::GetInstancedSocketTransform(UInstancedStaticMeshComponent* InstancedComp, int32 InstanceIndex, const FName& SocketName) {
+FTransform ACpp_Building_Base::GetInstancedSocketTransform(UInstancedStaticMeshComponent* InstancedComp, int32 InstanceIndex, 
+														   const FName& SocketName, bool WorldSpace) {
 	// Check if the instanced component & instance index are valid
 	if (InstancedComp && InstancedComp->IsValidInstance(InstanceIndex)) {
-		UE_LOG(LogTemp, Warning, TEXT("Instance Transform Location: "));
+		
 		FTransform InstanceTransform = FTransform();
 		// Log Instance Transform Location
 		
@@ -54,6 +55,15 @@ FTransform ACpp_Building_Base::GetInstancedSocketTransform(UInstancedStaticMeshC
 		FTransform RelativeTransform = UKismetMathLibrary::MakeRelativeTransform(SocketTransform, InstanceTransform);
 
 		FVector RelativeLocation = RelativeTransform.GetLocation();
+		// This is for when spawning actors rather than components so it will be in world space rather than component space
+		if (WorldSpace) {
+			RelativeLocation.Z = SocketTransform.GetLocation().Z;
+			FVector WorldLocation = InstanceTransform.GetLocation() + RelativeLocation;
+			RelativeTransform.SetLocation(WorldLocation);
+			return RelativeTransform;
+		}
+		// This is for when spawning components so it will be in component space
+
 		RelativeLocation.Z = InstanceTransform.GetLocation().Z + SocketTransform.GetLocation().Z;
 		// Change the Z value of Relative Transform to be the sum of the Z values of the Instance and Socket transforms
 		RelativeTransform.SetLocation(RelativeLocation);

@@ -42,7 +42,8 @@ public:
 	void DestroyInstance(FVector HitPoint);
 		
 	UFUNCTION(BlueprintCallable, Category = "Building")
-	FTransform GetInstancedSocketTransform(UInstancedStaticMeshComponent* InstancedComp, int32 InstanceIndex, const FName& SocketName);
+	FTransform GetInstancedSocketTransform(UInstancedStaticMeshComponent* InstancedComp, int32 InstanceIndex, const FName& SocketName, 
+										   bool WorldSpace = false);
 
 	
 	
