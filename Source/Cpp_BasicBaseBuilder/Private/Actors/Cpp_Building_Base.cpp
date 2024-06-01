@@ -51,8 +51,20 @@ FTransform ACpp_Building_Base::GetInstancedSocketTransform(UInstancedStaticMeshC
 		// Set the instance transform based on the instance index (false for component space)
 		InstancedComp->GetInstanceTransform(InstanceIndex, InstanceTransform, false);
 
+		// Check if the instance transform is equal to the default transform, if so return false
+		if (InstanceTransform.Equals(FTransform())) {
+			Success = false;
+			return FTransform();
+		}
+
 		// RTS_Component is used to get the socket transform in the component space
 		FTransform SocketTransform = InstancedComp->GetSocketTransform(SocketName, RTS_Component);
+
+		// Check if the socket transform is equal to the default transform, if so return false
+		if (SocketTransform.Equals(FTransform())) {
+			Success = false;
+			return FTransform();
+		}
 
 		FTransform RelativeTransform = UKismetMathLibrary::MakeRelativeTransform(SocketTransform, InstanceTransform);
 
