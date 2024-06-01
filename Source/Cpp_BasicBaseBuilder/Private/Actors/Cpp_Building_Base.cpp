@@ -3,7 +3,7 @@
 
 #include "Actors/Cpp_Building_Base.h"
 #include "Components/InstancedStaticMeshComponent.h"
-
+#include "Kismet/KismetMathLibrary.h"
 
 
 ACpp_Building_Base::ACpp_Building_Base() {
@@ -35,5 +35,25 @@ void ACpp_Building_Base::DestroyInstance(FVector HitPoint) {
 	if (HitIndexes.Num() > 0) {
 		FoundationInstancedMesh->RemoveInstance(HitIndexes[0]);
 	}
+}
+
+FTransform ACpp_Building_Base::GetInstancedSocketTransform(UInstancedStaticMeshComponent* InstancedComp, int32 InstanceIndex, const FName& SocketName) {
+	// Check if the instanced component & instance index are valid
+	if (InstancedComp && InstancedComp->IsValidInstance(InstanceIndex)) {
+		FTransform InstanceTransform = FTransform();
+		// Set the instance transform based on the instance index
+		InstancedComp->GetInstanceTransform(InstanceIndex, InstanceTransform);
+		// RTS_Component is used to get the socket transform in the component space
+		FTransform SocketTransform = InstancedComp->GetSocketTransform(SocketName, RTS_Component);
+
+		FTransform RelativeTransform = UKismetMathLibrary::MakeRelativeTransform(SocketTransform, InstanceTransform);
+
+		FVector RelativeLocation = RelativeTransform.GetLocation();
+		RelativeLocation.Z = InstanceTransform.GetLocation().Z + SocketTransform.GetLocation().Z;
+		// Change the Z value of Relative Transform to be the sum of the Z values of the Instance and Socket transforms
+		RelativeTransform.SetLocation(RelativeLocation);
+		return RelativeTransform;
+	}
+	return FTransform();
 }
 
