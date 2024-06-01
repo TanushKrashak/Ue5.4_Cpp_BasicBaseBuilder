@@ -38,7 +38,9 @@ void ACpp_Building_Base::DestroyInstance(FVector HitPoint) {
 }
 
 FTransform ACpp_Building_Base::GetInstancedSocketTransform(UInstancedStaticMeshComponent* InstancedComp, int32 InstanceIndex, 
-														   const FName& SocketName, bool WorldSpace) {
+														   const FName& SocketName, bool WorldSpace, bool& Success) {
+	// Set the success to false by default
+	Success = true;
 	// Check if the instanced component & instance index are valid
 	if (InstancedComp && InstancedComp->IsValidInstance(InstanceIndex)) {
 		
@@ -71,6 +73,7 @@ FTransform ACpp_Building_Base::GetInstancedSocketTransform(UInstancedStaticMeshC
 		RelativeTransform.SetLocation(RelativeLocation);
 		return RelativeTransform;
 	}
+	Success = false;
 	return FTransform();
 }
 
