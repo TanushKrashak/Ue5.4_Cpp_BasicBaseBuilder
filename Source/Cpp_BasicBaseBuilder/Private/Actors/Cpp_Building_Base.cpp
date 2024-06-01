@@ -46,8 +46,8 @@ FTransform ACpp_Building_Base::GetInstancedSocketTransform(UInstancedStaticMeshC
 		// Log Instance Transform Location
 		
 		
-		// Set the instance transform based on the instance index
-		InstancedComp->GetInstanceTransform(InstanceIndex, InstanceTransform);
+		// Set the instance transform based on the instance index (false for component space)
+		InstancedComp->GetInstanceTransform(InstanceIndex, InstanceTransform, false);
 
 		// RTS_Component is used to get the socket transform in the component space
 		FTransform SocketTransform = InstancedComp->GetSocketTransform(SocketName, RTS_Component);
@@ -58,6 +58,8 @@ FTransform ACpp_Building_Base::GetInstancedSocketTransform(UInstancedStaticMeshC
 		// This is for when spawning actors rather than components so it will be in world space rather than component space
 		if (WorldSpace) {
 			RelativeLocation.Z = SocketTransform.GetLocation().Z;
+			// True for world space so we can get the world location of the instance
+			InstancedComp->GetInstanceTransform(InstanceIndex, InstanceTransform, true);
 			FVector WorldLocation = InstanceTransform.GetLocation() + RelativeLocation;
 			RelativeTransform.SetLocation(WorldLocation);
 			return RelativeTransform;
