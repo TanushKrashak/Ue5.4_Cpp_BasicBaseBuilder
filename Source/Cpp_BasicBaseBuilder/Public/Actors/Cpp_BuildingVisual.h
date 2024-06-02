@@ -9,6 +9,7 @@
 
 // Forward Declarations
 class UStaticMeshComponent;
+class ACpp_Building_Base;
 
 UCLASS()
 class CPP_BASICBASEBUILDER_API ACpp_BuildingVisual : public AActor
@@ -25,6 +26,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Building")
 	UStaticMeshComponent* BuildingMesh;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Building")
+	TSubclassOf<ACpp_Building_Base> BuildingClass;
+
 	//====================================================================================================================
 	// FUNCTIONS
 	//====================================================================================================================	
@@ -40,7 +44,7 @@ public:
 	//====================================================================================================================
 	// FUNCTIONS
 	//====================================================================================================================
-	void SetBuildPosition(FHitResult HitResult);
-
+	void SetBuildPosition(const FHitResult HitResult);
+	void SpawnBuilding();
 	
 };

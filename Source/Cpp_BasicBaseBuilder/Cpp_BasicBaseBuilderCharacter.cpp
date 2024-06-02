@@ -69,7 +69,7 @@ void ACpp_BasicBaseBuilderCharacter::Tick(float DeltaSeconds) {
 	Super::Tick(DeltaSeconds);
 
 	if (bInBuildMode && Builder) {
-		Builder->SetBuildPosition(PerformLineTrace(650.0f, true));				
+		Builder->SetBuildPosition(PerformLineTrace(650.0f, false));				
 	}
 
 }

@@ -29,3 +29,7 @@ void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
 	}
 }
 
+void ACpp_BuildingVisual::SpawnBuilding() {
+	if (BuildingClass && !IsHidden())
+}
+
