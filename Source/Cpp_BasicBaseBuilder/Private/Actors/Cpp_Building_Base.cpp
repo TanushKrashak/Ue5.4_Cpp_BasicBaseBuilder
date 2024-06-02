@@ -13,6 +13,7 @@ ACpp_Building_Base::ACpp_Building_Base() {
 	FoundationInstancedMesh = CreateDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("FoundationInstancedMesh"));
 	RootComponent = FoundationInstancedMesh;
 
+	WallInstancedMesh = CreateDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("WallInstancedMesh"));
 }
 
 void ACpp_Building_Base::BeginPlay() {
