@@ -2,7 +2,7 @@
 
 
 #include "Actors/Cpp_BuildingVisual.h"
-
+#include "Components/StaticMeshComponent.h"
 
 ACpp_BuildingVisual::ACpp_BuildingVisual() {
 	PrimaryActorTick.bCanEverTick = false;
@@ -19,7 +19,7 @@ void ACpp_BuildingVisual::BeginPlay() {
 	SetActorHiddenInGame(true);
 }
 
-void ACpp_BuildingVisual::SetBuildPosition(const FHitResult& HitResult) {
+void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
 
 }
 

@@ -5,10 +5,10 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Cpp_BuildingVisual.generated.h"
-#include "Components/StaticMeshComponent.h"
+
 
 // Forward Declarations
-
+class UStaticMeshComponent;
 
 UCLASS()
 class CPP_BASICBASEBUILDER_API ACpp_BuildingVisual : public AActor
@@ -40,7 +40,7 @@ public:
 	//====================================================================================================================
 	// FUNCTIONS
 	//====================================================================================================================
-	void SetBuildPosition(FHitResult& HitResult);
+	void SetBuildPosition(FHitResult HitResult);
 
 	
 };
