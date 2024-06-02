@@ -68,9 +68,7 @@ void ACpp_BasicBaseBuilderCharacter::Tick(float DeltaSeconds) {
 	if (bInBuildMode) {
 		FHitResult HitResult = PerformLineTrace(650.0f, true);
 		if (HitResult.bBlockingHit) {
-			if (AActor* HitActor = HitResult.GetActor()) {
-
-			}
+			BuildingMesh->SetWorldLocation(HitResult.Location);
 		}
 	}
 
