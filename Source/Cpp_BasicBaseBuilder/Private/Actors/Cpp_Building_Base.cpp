@@ -17,16 +17,9 @@ ACpp_Building_Base::ACpp_Building_Base() {
 
 void ACpp_Building_Base::BeginPlay() {
 	Super::BeginPlay();
-	// Empty transform to start with
-	FTransform MeshTransform = FTransform();
-	// Add 3 instances of the mesh
-	for (uint8 i = 0; i < 3; i++) {
-		FoundationInstancedMesh->AddInstance(FTransform(MeshTransform));
-		FVector MeshLocation = MeshTransform.GetLocation();
-		MeshLocation.Z += 250;
-
-		MeshTransform.SetLocation(MeshLocation);
-	}
+	// Spawn the building at the location of the actor
+	MeshTransform.SetLocation(GetActorLocation());
+	
 }
 
 void ACpp_Building_Base::DestroyInstance(FVector HitPoint) {
