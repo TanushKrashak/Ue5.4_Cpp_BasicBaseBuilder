@@ -18,7 +18,9 @@ ACpp_Building_Base::ACpp_Building_Base() {
 void ACpp_Building_Base::BeginPlay() {
 	Super::BeginPlay();
 	// Spawn the building at the location of the actor
-	MeshTransform.SetLocation(GetActorLocation());
+	FoundationInstancedMesh->AddInstance(FTransform());
+	// Set its transform to the actor's transform
+	FoundationInstancedMesh->SetWorldTransform(GetActorTransform());
 	
 }
 
