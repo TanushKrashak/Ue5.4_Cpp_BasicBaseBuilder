@@ -68,9 +68,8 @@ void ACpp_BasicBaseBuilderCharacter::BeginPlay() {
 void ACpp_BasicBaseBuilderCharacter::Tick(float DeltaSeconds) {
 	Super::Tick(DeltaSeconds);
 
-	if (bInBuildMode) {
-		FHitResult HitResult = PerformLineTrace(650.0f, true);
-		
+	if (bInBuildMode && Builder) {
+		Builder->SetBuildPosition(PerformLineTrace(650.0f, true));				
 	}
 
 }
@@ -158,10 +157,10 @@ void ACpp_BasicBaseBuilderCharacter::SetBuildMode(bool Enabled) {
 	bInBuildMode = Enabled;
 	if (Builder) {
 		if (bInBuildMode) {
-			Builder->SetActorHiddenInGame(true);
+			Builder->SetActorHiddenInGame(false);
 		}
 		else {
-			Builder->SetActorHiddenInGame(false);
+			Builder->SetActorHiddenInGame(true);
 		}
 	}
 }
