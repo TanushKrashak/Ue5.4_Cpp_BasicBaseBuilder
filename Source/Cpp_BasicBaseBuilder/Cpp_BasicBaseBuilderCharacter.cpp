@@ -164,5 +164,7 @@ void ACpp_BasicBaseBuilderCharacter::SetBuildMode(bool Enabled) {
 }
 
 void ACpp_BasicBaseBuilderCharacter::SpawnBuilding() {
-
+	if (bInBuildMode && Builder) {
+		Builder->SpawnBuilding();
+	}
 }
