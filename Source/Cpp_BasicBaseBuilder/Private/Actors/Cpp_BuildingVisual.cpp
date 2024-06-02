@@ -5,16 +5,18 @@
 
 
 ACpp_BuildingVisual::ACpp_BuildingVisual() {
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
+	BuildingMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BuildingMesh"));
+	RootComponent = BuildingMesh;
 }
 
 void ACpp_BuildingVisual::BeginPlay() {
 	Super::BeginPlay();
 	
 }
-void ACpp_BuildingVisual::Tick(float DeltaTime) {
-	Super::Tick(DeltaTime);
+
+void ACpp_BuildingVisual::SetBuildPosition(const FHitResult& HitResult) {
 
 }
 

@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Cpp_BuildingVisual.generated.h"
+#include "Components/StaticMeshComponent.h"
 
 // Forward Declarations
 
@@ -21,12 +22,13 @@ protected:
 	//====================================================================================================================
 	// PROPERTIES & VARIABLES
 	//====================================================================================================================
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Building")
+	UStaticMeshComponent* BuildingMesh;
 
 	//====================================================================================================================
 	// FUNCTIONS
 	//====================================================================================================================	
-	virtual void BeginPlay() override;	
-	virtual void Tick(float DeltaTime) override;
+	virtual void BeginPlay() override;		
 
 
 public:
@@ -38,7 +40,7 @@ public:
 	//====================================================================================================================
 	// FUNCTIONS
 	//====================================================================================================================
-	
+	void SetBuildPosition(const FHitResult& HitResult);
 
 
 	
