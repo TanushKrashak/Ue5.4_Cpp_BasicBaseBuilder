@@ -52,6 +52,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
 
+	UPROPERTY(BlueprintReadOnly, Category = "Building")
+	bool bInBuildMode;
+
 	//================================================================================================================
 	// FUNCTIONS
 	//================================================================================================================
@@ -70,11 +73,11 @@ public:
 
 	//================================================================================================================
 	// FUNCTIONS
-	//================================================================================================================
-	
-	/** Returns CameraBoom subobject **/
+	//================================================================================================================		
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
-	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+	UFUNCTION(BlueprintCallable, Category = "Building")
+	void SetBuildMode(bool Enabled);
 };
 
