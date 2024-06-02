@@ -42,3 +42,13 @@ void ACpp_BuildingVisual::SpawnBuilding() {
 	}
 }
 
+void ACpp_BuildingVisual::CycleMesh() {
+	if (++BuildingMeshIndex > BuildingMeshes.Num()) {
+		BuildingMeshIndex = 0;
+	}
+	if (BuildingMeshes[BuildingMeshIndex]) {
+		BuildingMesh->SetStaticMesh(BuildingMeshes[BuildingMeshIndex]);
+
+	}
+}
+
