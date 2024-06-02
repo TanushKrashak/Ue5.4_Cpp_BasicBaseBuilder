@@ -3,6 +3,7 @@
 
 #include "Actors/Cpp_BuildingVisual.h"
 #include "Components/StaticMeshComponent.h"
+#include "Actors/Cpp_Building_Base.h"
 
 ACpp_BuildingVisual::ACpp_BuildingVisual() {
 	PrimaryActorTick.bCanEverTick = false;
@@ -30,6 +31,8 @@ void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
 }
 
 void ACpp_BuildingVisual::SpawnBuilding() {
-	if (BuildingClass && !IsHidden())
+	if (BuildingClass && !IsHidden()) {
+		GetWorld()->SpawnActor<ACpp_Building_Base>(BuildingClass, GetActorTransform());
+	}
 }
 
