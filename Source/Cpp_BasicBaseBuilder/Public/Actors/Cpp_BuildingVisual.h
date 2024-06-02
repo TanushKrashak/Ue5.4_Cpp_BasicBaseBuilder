@@ -10,6 +10,7 @@
 // Forward Declarations
 class UStaticMeshComponent;
 class ACpp_Building_Base;
+class UStaticMesh;
 
 UCLASS()
 class CPP_BASICBASEBUILDER_API ACpp_BuildingVisual : public AActor
@@ -28,6 +29,11 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Building")
 	TSubclassOf<ACpp_Building_Base> BuildingClass;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Building")
+	TArray<UStaticMesh*> BuildingMeshes;
+
+	uint8 BuildingMeshIndex = 0;
 
 	//====================================================================================================================
 	// FUNCTIONS

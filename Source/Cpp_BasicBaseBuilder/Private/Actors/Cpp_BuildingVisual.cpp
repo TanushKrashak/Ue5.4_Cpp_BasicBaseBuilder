@@ -11,6 +11,7 @@ ACpp_BuildingVisual::ACpp_BuildingVisual() {
 	BuildingMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BuildingMesh"));
 	RootComponent = BuildingMesh;
 
+	BuildingMeshIndex = 0;
 	
 }
 
