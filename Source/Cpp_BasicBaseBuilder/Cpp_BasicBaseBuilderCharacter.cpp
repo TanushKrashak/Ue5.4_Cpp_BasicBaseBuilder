@@ -11,6 +11,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "DrawDebugHelpers.h"
+#include "Actors/Cpp_BuildingVisual.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -56,23 +57,20 @@ ACpp_BasicBaseBuilderCharacter::ACpp_BasicBaseBuilderCharacter()
 }
 
 
-void ACpp_BasicBaseBuilderCharacter::BeginPlay()
-{
+void ACpp_BasicBaseBuilderCharacter::BeginPlay() {
 	// Call the base class  
 	Super::BeginPlay();
+
+	if (BuildingClass) {
+		Builder = GetWorld()->SpawnActor<ACpp_BuildingVisual>(BuildingClass);
+	}
 }
 void ACpp_BasicBaseBuilderCharacter::Tick(float DeltaSeconds) {
 	Super::Tick(DeltaSeconds);
 
 	if (bInBuildMode) {
 		FHitResult HitResult = PerformLineTrace(650.0f, true);
-		if (HitResult.bBlockingHit) {
-			BuildingMesh->SetHiddenInGame(false);
-			BuildingMesh->SetWorldLocation(HitResult.Location);
-		}
-		else {
-			BuildingMesh->SetHiddenInGame(true);
-		}
+		
 	}
 
 }
@@ -159,9 +157,9 @@ FHitResult ACpp_BasicBaseBuilderCharacter::PerformLineTrace(float Distance /*= 6
 void ACpp_BasicBaseBuilderCharacter::SetBuildMode(bool Enabled) {
 	bInBuildMode = Enabled;
 	if (bInBuildMode) {
-		BuildingMesh->SetHiddenInGame(false);
+		
 	}
 	else {
-		BuildingMesh->SetHiddenInGame(true);
+		
 	}
 }

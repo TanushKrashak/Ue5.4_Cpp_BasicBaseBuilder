@@ -14,6 +14,7 @@ ACpp_BuildingVisual::ACpp_BuildingVisual() {
 void ACpp_BuildingVisual::BeginPlay() {
 	Super::BeginPlay();
 	
+	
 }
 
 void ACpp_BuildingVisual::SetBuildPosition(const FHitResult& HitResult) {

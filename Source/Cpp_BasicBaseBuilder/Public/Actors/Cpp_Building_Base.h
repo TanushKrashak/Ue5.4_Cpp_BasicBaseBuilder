@@ -24,6 +24,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Building")
 	UInstancedStaticMeshComponent* FoundationInstancedMesh;
 
+
 	//====================================================================================================================
 	// FUNCTIONS
 	//====================================================================================================================	

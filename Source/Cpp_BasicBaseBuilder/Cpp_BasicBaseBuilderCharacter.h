@@ -14,6 +14,7 @@ class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
 class UStaticMeshComponent;
+class ACpp_BuildingVisual;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
@@ -57,8 +58,12 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Building")
 	bool bInBuildMode;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Building")
-	UStaticMeshComponent* BuildingMesh;
+	UPROPERTY(BlueprintReadOnly, Category = "Building")
+	ACpp_BuildingVisual* Builder;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Building")
+	TSubclassOf<ACpp_BuildingVisual> BuildingClass;
+
 
 	//================================================================================================================
 	// FUNCTIONS
