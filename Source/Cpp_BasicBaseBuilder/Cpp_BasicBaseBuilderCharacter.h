@@ -23,6 +23,7 @@ class ACpp_BasicBaseBuilderCharacter : public ACharacter
 
 public:
 	ACpp_BasicBaseBuilderCharacter();
+	
 
 protected:
 	//================================================================================================================
@@ -59,6 +60,7 @@ protected:
 	// FUNCTIONS
 	//================================================================================================================
 	virtual void BeginPlay();
+	virtual void Tick(float DeltaSeconds) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	void Move(const FInputActionValue& Value);
@@ -77,7 +79,15 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
+	// Getters
+	UFUNCTION(BlueprintCallable, Category = "Building")
+	bool GetBuildMode() const { return bInBuildMode; }
+
+	// Setters
 	UFUNCTION(BlueprintCallable, Category = "Building")
 	void SetBuildMode(bool Enabled);
+
+
+
 };
 

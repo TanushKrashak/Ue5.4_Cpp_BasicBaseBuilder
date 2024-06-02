@@ -52,10 +52,15 @@ ACpp_BasicBaseBuilderCharacter::ACpp_BasicBaseBuilderCharacter()
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 }
 
+
 void ACpp_BasicBaseBuilderCharacter::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
+}
+void ACpp_BasicBaseBuilderCharacter::Tick(float DeltaSeconds) {
+	Super::Tick(DeltaSeconds);
+
 }
 void ACpp_BasicBaseBuilderCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
