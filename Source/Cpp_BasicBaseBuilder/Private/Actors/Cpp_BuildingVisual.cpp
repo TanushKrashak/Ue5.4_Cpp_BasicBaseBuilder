@@ -19,7 +19,13 @@ void ACpp_BuildingVisual::BeginPlay() {
 	SetActorHiddenInGame(true);
 }
 
-void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {	
-	SetActorLocation(HitResult.Location);
+void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
+	if (HitResult.bBlockingHit) {
+		SetActorHiddenInGame(false);
+		SetActorLocation(HitResult.Location);
+	}
+	else {
+		SetActorHiddenInGame(true);
+	}
 }
 
