@@ -13,6 +13,7 @@ class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
+class UStaticMeshComponent;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
@@ -55,6 +56,9 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "Building")
 	bool bInBuildMode;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Building")
+	UStaticMeshComponent* BuildingMesh;
 
 	//================================================================================================================
 	// FUNCTIONS

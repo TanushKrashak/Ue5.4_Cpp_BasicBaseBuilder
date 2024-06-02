@@ -11,6 +11,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 
+
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
 
@@ -52,6 +53,7 @@ ACpp_BasicBaseBuilderCharacter::ACpp_BasicBaseBuilderCharacter()
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 
 	bInBuildMode = false;
+	BuildingMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BuildingMesh"));
 }
 
 
@@ -66,9 +68,7 @@ void ACpp_BasicBaseBuilderCharacter::Tick(float DeltaSeconds) {
 	if (bInBuildMode) {
 		UE_LOG(LogTemplateCharacter, Warning, TEXT("Building Mode Enabled"));
 	}
-	else {
-		UE_LOG(LogTemplateCharacter, Warning, TEXT("Building Mode Disabled"));
-	}
+
 }
 void ACpp_BasicBaseBuilderCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
