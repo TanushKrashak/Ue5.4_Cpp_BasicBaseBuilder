@@ -19,6 +19,11 @@ void ACpp_BuildingVisual::BeginPlay() {
 	Super::BeginPlay();
 	
 	SetActorHiddenInGame(true);
+
+	if (BuildingMeshes[BuildingMeshIndex]) {
+		BuildingMesh->SetStaticMesh(BuildingMeshes[BuildingMeshIndex]);
+
+	}
 }
 
 void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
