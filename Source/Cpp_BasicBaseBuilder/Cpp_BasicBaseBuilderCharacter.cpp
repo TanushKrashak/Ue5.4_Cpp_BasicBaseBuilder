@@ -156,11 +156,6 @@ FHitResult ACpp_BasicBaseBuilderCharacter::PerformLineTrace(float Distance /*= 6
 void ACpp_BasicBaseBuilderCharacter::SetBuildMode(bool Enabled) {
 	bInBuildMode = Enabled;
 	if (Builder) {
-		if (bInBuildMode) {
-			Builder->SetActorHiddenInGame(false);
-		}
-		else {
-			Builder->SetActorHiddenInGame(true);
-		}
+		Builder->SetActorHiddenInGame(!bInBuildMode);
 	}
 }

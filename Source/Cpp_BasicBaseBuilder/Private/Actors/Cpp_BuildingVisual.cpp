@@ -16,7 +16,7 @@ ACpp_BuildingVisual::ACpp_BuildingVisual() {
 void ACpp_BuildingVisual::BeginPlay() {
 	Super::BeginPlay();
 	
-	SetActorHiddenInGame(true);
+	//SetActorHiddenInGame(true);
 }
 
 void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
