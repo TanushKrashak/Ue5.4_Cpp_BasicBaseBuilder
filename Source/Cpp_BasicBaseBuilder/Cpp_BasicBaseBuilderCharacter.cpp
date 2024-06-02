@@ -137,7 +137,7 @@ void ACpp_BasicBaseBuilderCharacter::Look(const FInputActionValue& Value)
 
 
 FHitResult ACpp_BasicBaseBuilderCharacter::PerformLineTrace(float Distance /*= 650.0f*/, bool DrawDebug /*= false*/) {
-	FVector StartLocation = FollowCamera->GetComponentLocation();
+	FVector StartLocation = GetPawnViewLocation();
 	FVector EndLocation = StartLocation + (FollowCamera->GetForwardVector() * Distance);
 	
 	FHitResult HitResult;
