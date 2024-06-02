@@ -168,3 +168,9 @@ void ACpp_BasicBaseBuilderCharacter::SpawnBuilding() {
 		Builder->SpawnBuilding();
 	}
 }
+
+void ACpp_BasicBaseBuilderCharacter::CycleBuildingMesh() {
+	if (Builder) {
+		Builder->CycleMesh();
+	}
+}
