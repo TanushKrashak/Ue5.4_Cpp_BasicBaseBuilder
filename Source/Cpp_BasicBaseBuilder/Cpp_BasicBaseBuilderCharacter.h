@@ -96,13 +96,16 @@ public:
 	// Getters
 	UFUNCTION(BlueprintCallable, Category = "Building")
 	bool GetBuildMode() const { return bInBuildMode; }
-
 	// Setters
 	UFUNCTION(BlueprintCallable, Category = "Building")
 	void SetBuildMode(bool Enabled);
 
+
 	UFUNCTION(BlueprintCallable, Category = "Building")
 	void SpawnBuilding();
+
+	UFUNCTION(BlueprintCallable, Category = "Building")
+	void CycleBuildingMesh();
 
 };
 
