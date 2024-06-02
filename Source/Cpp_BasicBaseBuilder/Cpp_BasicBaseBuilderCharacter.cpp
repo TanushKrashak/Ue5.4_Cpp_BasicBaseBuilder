@@ -10,7 +10,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
-
+#include "DrawDebugHelpers.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -133,7 +133,7 @@ void ACpp_BasicBaseBuilderCharacter::Look(const FInputActionValue& Value)
 }
 
 
-FHitResult ACpp_BasicBaseBuilderCharacter::PerformLineTrace(float Distance /*= 650.0f*/) {
+FHitResult ACpp_BasicBaseBuilderCharacter::PerformLineTrace(float Distance /*= 650.0f*/, bool DrawDebug /*= false*/) {
 	FVector StartLocation = FollowCamera->GetComponentLocation();
 	FVector EndLocation = StartLocation + (FollowCamera->GetForwardVector() * Distance);
 	
@@ -143,7 +143,10 @@ FHitResult ACpp_BasicBaseBuilderCharacter::PerformLineTrace(float Distance /*= 6
 	TraceParams.AddIgnoredActor(this);
 
 	// Perform the line trace
-	GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECC_Visibility, TraceParams)		
+	GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECC_Visibility, TraceParams);
+	if (DrawDebug) {
+		DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Red, false, 1.0f, 0, 1.0f);
+	}
 	return HitResult;
 }
 

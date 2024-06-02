@@ -70,7 +70,7 @@ protected:
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
 
-	FHitResult PerformLineTrace(float Distance = 650.0f);
+	FHitResult PerformLineTrace(float Distance = 650.0f, bool DrawDebug = false);
 
 public:
 	//================================================================================================================
