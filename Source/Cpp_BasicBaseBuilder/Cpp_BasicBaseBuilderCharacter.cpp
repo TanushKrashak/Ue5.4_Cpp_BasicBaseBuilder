@@ -61,6 +61,12 @@ void ACpp_BasicBaseBuilderCharacter::BeginPlay()
 void ACpp_BasicBaseBuilderCharacter::Tick(float DeltaSeconds) {
 	Super::Tick(DeltaSeconds);
 
+	if (bInBuildMode) {
+		UE_LOG(LogTemplateCharacter, Log, TEXT("Building Mode Enabled"));
+	}
+	else {
+		UE_LOG(LogTemplateCharacter, Log, TEXT("Building Mode Disabled"));
+	}
 }
 void ACpp_BasicBaseBuilderCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
