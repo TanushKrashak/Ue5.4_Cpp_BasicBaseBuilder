@@ -96,6 +96,7 @@ void ACpp_BasicBaseBuilderCharacter::SetupPlayerInputComponent(class UInputCompo
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ACpp_BasicBaseBuilderCharacter::Look);
 
 		// Build
+		EnhancedInputComponent->BindAction(BuildAction, ETriggerEvent::Started, this, &ACpp_BasicBaseBuilderCharacter::SpawnBuilding);
 	}
 	else {
 		UE_LOG(LogTemplateCharacter, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
