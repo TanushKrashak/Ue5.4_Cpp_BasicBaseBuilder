@@ -66,7 +66,7 @@ void ACpp_BasicBaseBuilderCharacter::Tick(float DeltaSeconds) {
 	Super::Tick(DeltaSeconds);
 
 	if (bInBuildMode) {
-		
+		FHitResult HitResult = PerformLineTrace(650.0f, true);
 	}
 
 }
@@ -145,7 +145,7 @@ FHitResult ACpp_BasicBaseBuilderCharacter::PerformLineTrace(float Distance /*= 6
 	// Perform the line trace
 	GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECC_Visibility, TraceParams);
 	if (DrawDebug) {
-		DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Red, false, 1.0f, 0, 1.0f);
+		DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Red);
 	}
 	return HitResult;
 }
