@@ -55,6 +55,8 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
 
+
+
 	UPROPERTY(BlueprintReadOnly, Category = "Building")
 	bool bInBuildMode;
 
@@ -97,7 +99,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Building")
 	void SetBuildMode(bool Enabled);
 
-
+	UFUNCTION(BlueprintCallable, Category = "Building")
+	void SpawnBuilding();
 
 };
 
