@@ -66,7 +66,7 @@ void ACpp_BasicBaseBuilderCharacter::Tick(float DeltaSeconds) {
 	Super::Tick(DeltaSeconds);
 
 	if (bInBuildMode) {
-		UE_LOG(LogTemplateCharacter, Warning, TEXT("Building Mode Enabled"));
+		
 	}
 
 }
@@ -137,4 +137,10 @@ void ACpp_BasicBaseBuilderCharacter::Look(const FInputActionValue& Value)
 
 void ACpp_BasicBaseBuilderCharacter::SetBuildMode(bool Enabled) {
 	bInBuildMode = Enabled;
+	if (bInBuildMode) {
+		BuildingMesh->SetHiddenInGame(false);
+	}
+	else {
+		BuildingMesh->SetHiddenInGame(true);
+	}
 }
