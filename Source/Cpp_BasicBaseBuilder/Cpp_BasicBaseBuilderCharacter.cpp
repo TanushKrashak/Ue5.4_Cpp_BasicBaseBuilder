@@ -134,7 +134,17 @@ void ACpp_BasicBaseBuilderCharacter::Look(const FInputActionValue& Value)
 
 
 FHitResult ACpp_BasicBaseBuilderCharacter::PerformLineTrace(float Distance /*= 650.0f*/) {
+	FVector StartLocation = FollowCamera->GetComponentLocation();
+	FVector EndLocation = StartLocation + (FollowCamera->GetForwardVector() * Distance);
+	
+	FHitResult HitResult;
+	// TraceParams with the player himself ignored
+	FCollisionQueryParams TraceParams;
+	TraceParams.AddIgnoredActor(this);
 
+	// Perform the line trace
+	GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECC_Visibility, TraceParams)		
+	return HitResult;
 }
 
 void ACpp_BasicBaseBuilderCharacter::SetBuildMode(bool Enabled) {
