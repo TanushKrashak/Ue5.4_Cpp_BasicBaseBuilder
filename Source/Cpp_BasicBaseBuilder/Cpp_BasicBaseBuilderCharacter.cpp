@@ -50,6 +50,8 @@ ACpp_BasicBaseBuilderCharacter::ACpp_BasicBaseBuilderCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
+
+	bInBuildMode = false;
 }
 
 
@@ -62,10 +64,10 @@ void ACpp_BasicBaseBuilderCharacter::Tick(float DeltaSeconds) {
 	Super::Tick(DeltaSeconds);
 
 	if (bInBuildMode) {
-		UE_LOG(LogTemplateCharacter, Log, TEXT("Building Mode Enabled"));
+		UE_LOG(LogTemplateCharacter, Warning, TEXT("Building Mode Enabled"));
 	}
 	else {
-		UE_LOG(LogTemplateCharacter, Log, TEXT("Building Mode Disabled"));
+		UE_LOG(LogTemplateCharacter, Warning, TEXT("Building Mode Disabled"));
 	}
 }
 void ACpp_BasicBaseBuilderCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
