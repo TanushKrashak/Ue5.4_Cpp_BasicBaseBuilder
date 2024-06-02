@@ -9,12 +9,14 @@ ACpp_BuildingVisual::ACpp_BuildingVisual() {
 
 	BuildingMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BuildingMesh"));
 	RootComponent = BuildingMesh;
+
+	
 }
 
 void ACpp_BuildingVisual::BeginPlay() {
 	Super::BeginPlay();
 	
-	
+	SetActorHiddenInGame(true);
 }
 
 void ACpp_BuildingVisual::SetBuildPosition(const FHitResult& HitResult) {
