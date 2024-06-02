@@ -68,7 +68,11 @@ void ACpp_BasicBaseBuilderCharacter::Tick(float DeltaSeconds) {
 	if (bInBuildMode) {
 		FHitResult HitResult = PerformLineTrace(650.0f, true);
 		if (HitResult.bBlockingHit) {
+			BuildingMesh->SetHiddenInGame(false);
 			BuildingMesh->SetWorldLocation(HitResult.Location);
+		}
+		else {
+			BuildingMesh->SetHiddenInGame(true);
 		}
 	}
 
