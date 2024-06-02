@@ -170,7 +170,7 @@ void ACpp_BasicBaseBuilderCharacter::SpawnBuilding() {
 }
 
 void ACpp_BasicBaseBuilderCharacter::CycleBuildingMesh() {
-	if (Builder) {
+	if (Builder && bInBuildMode) {
 		Builder->CycleMesh();
 	}
 }

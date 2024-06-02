@@ -33,7 +33,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Building")
 	TArray<UStaticMesh*> BuildingMeshes;
 
-	uint8 BuildingMeshIndex = 0;
+	uint8 BuildingMeshIndex;
 
 	//====================================================================================================================
 	// FUNCTIONS
@@ -52,5 +52,5 @@ public:
 	//====================================================================================================================
 	void SetBuildPosition(const FHitResult HitResult);
 	void SpawnBuilding();
-	
+	void CycleMesh();
 };
