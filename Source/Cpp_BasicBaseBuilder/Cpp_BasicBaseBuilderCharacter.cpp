@@ -123,5 +123,5 @@ void ACpp_BasicBaseBuilderCharacter::Look(const FInputActionValue& Value)
 }
 
 void ACpp_BasicBaseBuilderCharacter::SetBuildMode(bool Enabled) {
-	//bInBuildMode = Enabled;
+	bInBuildMode = Enabled;
 }
