@@ -70,20 +70,18 @@ void ACpp_BasicBaseBuilderCharacter::Tick(float DeltaSeconds) {
 	}
 
 }
-void ACpp_BasicBaseBuilderCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
+
+void ACpp_BasicBaseBuilderCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) {
 	// Add Input Mapping Context
-	if (APlayerController* PlayerController = Cast<APlayerController>(GetController()))
-	{
-		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
-		{
+	if (APlayerController* PlayerController = Cast<APlayerController>(GetController())) {
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer())) {
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
 		}
 	}
-	
+
 	// Set up action bindings
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent)) {
-		
+
 		// Jumping
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
@@ -94,8 +92,7 @@ void ACpp_BasicBaseBuilderCharacter::SetupPlayerInputComponent(UInputComponent* 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ACpp_BasicBaseBuilderCharacter::Look);
 	}
-	else
-	{
+	else {
 		UE_LOG(LogTemplateCharacter, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
 	}
 }
@@ -133,6 +130,11 @@ void ACpp_BasicBaseBuilderCharacter::Look(const FInputActionValue& Value)
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+
+FHitResult ACpp_BasicBaseBuilderCharacter::PerformLineTrace(float Distance /*= 650.0f*/) {
+
 }
 
 void ACpp_BasicBaseBuilderCharacter::SetBuildMode(bool Enabled) {
