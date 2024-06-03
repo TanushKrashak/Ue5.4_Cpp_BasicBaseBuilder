@@ -77,3 +77,11 @@ FTransform ACpp_Building_Base::GetInstancedSocketTransform(UInstancedStaticMeshC
 	return FTransform();
 }
 
+int32 ACpp_Building_Base::GetHitIndex(const FHitResult& HitResult) {
+	TArray<int32> HitIndexes = FoundationInstancedMesh->GetInstancesOverlappingSphere(HitResult.Location, 2.0f);
+	if (HitIndexes.Num()) {
+		return HitIndexes[0];
+	}
+	return -1;
+}
+
