@@ -8,7 +8,7 @@
 
 // Forward Declarations
 class UInstancedStaticMeshComponent;
-class EBuildType;
+enum class EBuildType : uint8;
 
 UCLASS()
 class CPP_BASICBASEBUILDER_API ACpp_Building_Base : public AActor
