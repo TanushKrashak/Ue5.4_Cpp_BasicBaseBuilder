@@ -41,6 +41,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Building")
 	UMaterialInstance* MaterialTrue;
 
+	bool bMaterialIsTrue;
 
 	//====================================================================================================================
 	// FUNCTIONS

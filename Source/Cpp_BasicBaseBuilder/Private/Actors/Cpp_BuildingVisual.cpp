@@ -14,6 +14,7 @@ ACpp_BuildingVisual::ACpp_BuildingVisual() {
 
 	BuildingMeshIndex = 0;
 	
+	bMaterialIsTrue = false;
 }
 
 void ACpp_BuildingVisual::BeginPlay() {
@@ -27,6 +28,7 @@ void ACpp_BuildingVisual::BeginPlay() {
 	}
 	// On start, set the material to the can place material
 	if (MaterialTrue) {
+		bMaterialIsTrue = true;
 		BuildingMesh->SetMaterial(0, MaterialTrue);
 	}
 }
@@ -44,13 +46,15 @@ void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
 			if (!SocketTransform.Equals(FTransform())) {
 				SetActorTransform(SocketTransform);
 				// Set the material to the true material
-				if (MaterialTrue) {
+				if (MaterialTrue && !bMaterialIsTrue) {
+					bMaterialIsTrue = true;
 					BuildingMesh->SetMaterial(0, MaterialTrue);
 				}
 				return;
 			}
 			else {
-				if (MaterialFalse) {
+				if (MaterialFalse && bMaterialIsTrue) {
+					bMaterialIsTrue = false;
 					BuildingMesh->SetMaterial(0, MaterialFalse);
 				}
 				SetActorLocation(HitResult.Location);
