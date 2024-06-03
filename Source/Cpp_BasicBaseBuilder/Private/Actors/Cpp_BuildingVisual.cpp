@@ -25,7 +25,10 @@ void ACpp_BuildingVisual::BeginPlay() {
 		BuildingMesh->SetStaticMesh(BuildingMeshes[BuildingMeshIndex]);
 
 	}
-	
+	// On start, set the material to the can place material
+	if (MaterialTrue) {
+		BuildingMesh->SetMaterial(0, MaterialTrue);
+	}
 }
 
 ACpp_Building_Base* ACpp_BuildingVisual::GetHitBuildingActor(const FHitResult& HitResult) {
