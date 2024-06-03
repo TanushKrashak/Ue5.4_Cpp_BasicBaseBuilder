@@ -40,9 +40,16 @@ void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
 			FTransform SocketTransform = HitBuilding->GetHitSocketTransform(HitResult);
 			if (!SocketTransform.Equals(FTransform())) {
 				SetActorTransform(SocketTransform);
+				// Set the material to the true material
+				if (MaterialTrue) {
+					BuildingMesh->SetMaterial(0, MaterialTrue);
+				}
 				return;
 			}
 			else {
+				if (MaterialFalse) {
+					BuildingMesh->SetMaterial(0, MaterialFalse);
+				}
 				SetActorLocation(HitResult.Location);
 			}
 		}			
