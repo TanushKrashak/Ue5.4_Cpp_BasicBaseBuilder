@@ -87,3 +87,20 @@ int32 ACpp_Building_Base::GetHitIndex(const FHitResult& HitResult) {
 	return -1;
 }
 
+FTransform ACpp_Building_Base::GetHitSocketTransform(const FHitResult& HitResult, float ValidHitDistance /*= 100.0f*/) {
+	int32 HitIndex = GetHitIndex(HitResult);
+	if (HitIndex != -1) {
+		TArray<FName> SocketNames = FoundationInstancedMesh->GetAllSocketNames();
+		for (const FName& SocketName : SocketNames) {
+			FTransform SocketTransform = FoundationInstancedMesh->GetSocketTransform(SocketName);
+			if (FVector::Distance(SocketTransform.GetLocation(), HitResult.Location) <= ValidHitDistance) {\
+				// log valid hit socket name
+				UE_LOG(LogTemp, Warning, TEXT("Valid Hit Socket Name: %s"), *SocketName.ToString());
+				return SocketTransform;				
+			}
+		}		
+		
+	}
+	return FTransform();
+}
+
