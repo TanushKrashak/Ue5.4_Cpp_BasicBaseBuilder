@@ -25,6 +25,7 @@ void ACpp_BuildingVisual::BeginPlay() {
 		BuildingMesh->SetStaticMesh(BuildingMeshes[BuildingMeshIndex]);
 
 	}
+	
 }
 
 ACpp_Building_Base* ACpp_BuildingVisual::GetHitBuildingActor(const FHitResult& HitResult) {

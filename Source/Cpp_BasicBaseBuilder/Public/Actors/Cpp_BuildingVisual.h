@@ -11,6 +11,7 @@
 class UStaticMeshComponent;
 class ACpp_Building_Base;
 class UStaticMesh;
+class UMaterialInstance;
 
 UCLASS()
 class CPP_BASICBASEBUILDER_API ACpp_BuildingVisual : public AActor
@@ -35,7 +36,11 @@ protected:
 
 	uint8 BuildingMeshIndex;
 
-	
+	UPROPERTY(EditDefaultsOnly, Category = "Building")
+	UMaterialInstance* MaterialFalse;
+	UPROPERTY(EditDefaultsOnly, Category = "Building")
+	UMaterialInstance* MaterialTrue;
+
 
 	//====================================================================================================================
 	// FUNCTIONS
