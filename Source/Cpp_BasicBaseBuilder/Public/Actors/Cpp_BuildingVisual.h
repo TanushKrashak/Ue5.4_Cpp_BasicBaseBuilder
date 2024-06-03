@@ -35,7 +35,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Building")
 	TArray<FBuildingVisualType> BuildTypes;
 
-	uint8 BuildingMeshIndex;
+	uint8 BuildingTypeIndex;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Building")
 	UMaterialInstance* MaterialFalse;
