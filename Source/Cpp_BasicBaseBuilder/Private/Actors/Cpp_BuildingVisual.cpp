@@ -39,11 +39,14 @@ ACpp_Building_Base* ACpp_BuildingVisual::GetHitBuildingActor(const FHitResult& H
 }
 
 void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
+	// If we hit something
 	if (HitResult.bBlockingHit) {
 		SetActorHiddenInGame(false);		
 		InteractingBuilding = GetHitBuildingActor(HitResult);
+		// If we hit a building
 		if (InteractingBuilding) {
 			FTransform SocketTransform = InteractingBuilding->GetHitSocketTransform(HitResult);
+			// If socket transform was changed
 			if (!SocketTransform.Equals(FTransform())) {
 				SetActorTransform(SocketTransform);
 				// Set the material to the true material
@@ -66,6 +69,8 @@ void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
 		}
 	}	
 	else {
+		// If we didn't hit anything, hide the actor
+		InteractingBuilding = nullptr;
 		SetActorHiddenInGame(true);
 	}
 }
