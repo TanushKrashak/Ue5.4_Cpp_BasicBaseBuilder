@@ -5,6 +5,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Actors/Cpp_Building_Base.h"
 
+
 ACpp_BuildingVisual::ACpp_BuildingVisual() {
 	PrimaryActorTick.bCanEverTick = false;
 
@@ -24,6 +25,10 @@ void ACpp_BuildingVisual::BeginPlay() {
 		BuildingMesh->SetStaticMesh(BuildingMeshes[BuildingMeshIndex]);
 
 	}
+}
+
+ACpp_Building_Base* ACpp_BuildingVisual::GetHitBuildingActor(const FHitResult& HitResult) {
+	return Cast<ACpp_Building_Base>(HitResult.GetActor());
 }
 
 void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
