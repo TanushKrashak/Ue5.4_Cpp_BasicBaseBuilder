@@ -32,6 +32,7 @@ protected:
 	//====================================================================================================================	
 	virtual void BeginPlay() override;
 
+
 public:
 	//====================================================================================================================
 	// PROPERTIES & VARIABLES
@@ -48,7 +49,7 @@ public:
 	FTransform GetInstancedSocketTransform(UInstancedStaticMeshComponent* InstancedComp, int32 InstanceIndex, const FName& SocketName, 
 										   bool& Success, bool WorldSpace = false);
 
-	
+	int32 GetHitIndex(const FHitResult& HitResult);
 	
 
 	
