@@ -97,6 +97,6 @@ void ACpp_BuildingVisual::CycleMesh() {
 }
 
 void ACpp_BuildingVisual::AddInstance(const FTransform ActorTransform) {
-
+	FoundationInstancedMesh->AddInstanceWorldSpace(ActorTransform);
 }
 
