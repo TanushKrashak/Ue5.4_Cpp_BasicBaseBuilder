@@ -93,9 +93,8 @@ FTransform ACpp_Building_Base::GetHitSocketTransform(const FHitResult& HitResult
 		TArray<FName> SocketNames = FoundationInstancedMesh->GetAllSocketNames();
 		for (const FName& SocketName : SocketNames) {
 			FTransform SocketTransform = FoundationInstancedMesh->GetSocketTransform(SocketName);
-			if (FVector::Distance(SocketTransform.GetLocation(), HitResult.Location) <= ValidHitDistance) {\
-				// log valid hit socket name
-				UE_LOG(LogTemp, Warning, TEXT("Valid Hit Socket Name: %s"), *SocketName.ToString());
+			if (FVector::Distance(SocketTransform.GetLocation(), HitResult.Location) <= ValidHitDistance) {			
+				
 				return SocketTransform;				
 			}
 		}		
