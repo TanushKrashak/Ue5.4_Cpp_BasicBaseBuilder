@@ -51,6 +51,6 @@ public:
 
 	int32 GetHitIndex(const FHitResult& HitResult);
 	
-	FTransform GetHitSocketTransform(const FHitResult& HitResult, const FName& SocketName, bool& Success, bool WorldSpace = false);
+	FTransform GetHitSocketTransform(const FHitResult& HitResult, float ValidHitDistance = 100.0f);
 	
 };
