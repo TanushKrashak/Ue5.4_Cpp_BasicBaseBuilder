@@ -34,7 +34,11 @@ ACpp_Building_Base* ACpp_BuildingVisual::GetHitBuildingActor(const FHitResult& H
 void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
 	if (HitResult.bBlockingHit) {
 		if (ACpp_Building_Base* HitBuilding = GetHitBuildingActor(HitResult)) {
-
+			int32 HitIndex = HitBuilding->GetHitIndex(HitResult);
+			if (HitIndex != -1) {
+				
+			}			
+			UE_LOG(LogTemp, Warning, TEXT("Hit Index: %d"), HitIndex);
 		}
 		SetActorHiddenInGame(false);
 		SetActorLocation(HitResult.Location);
