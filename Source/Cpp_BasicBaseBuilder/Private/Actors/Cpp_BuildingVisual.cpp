@@ -41,9 +41,9 @@ ACpp_Building_Base* ACpp_BuildingVisual::GetHitBuildingActor(const FHitResult& H
 void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
 	if (HitResult.bBlockingHit) {
 		SetActorHiddenInGame(false);		
-
-		if (ACpp_Building_Base* HitBuilding = GetHitBuildingActor(HitResult)) {
-			FTransform SocketTransform = HitBuilding->GetHitSocketTransform(HitResult);
+		InteractingBuilding = GetHitBuildingActor(HitResult);
+		if (InteractingBuilding) {
+			FTransform SocketTransform = InteractingBuilding->GetHitSocketTransform(HitResult);
 			if (!SocketTransform.Equals(FTransform())) {
 				SetActorTransform(SocketTransform);
 				// Set the material to the true material
@@ -74,7 +74,7 @@ void ACpp_BuildingVisual::SpawnBuilding() {
 	if (BuildingClass && !IsHidden()) {
 		GetWorld()->SpawnActor<ACpp_Building_Base>(BuildingClass, GetActorTransform());
 	}
-}
+}	
 
 void ACpp_BuildingVisual::CycleMesh() {
 	if (++BuildingTypeIndex >= BuildTypes.Num()) {
