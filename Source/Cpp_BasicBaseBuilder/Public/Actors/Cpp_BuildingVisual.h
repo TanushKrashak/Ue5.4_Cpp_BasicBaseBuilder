@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "DataTypes.h"
 #include "Cpp_BuildingVisual.generated.h"
 
 
@@ -32,7 +33,7 @@ protected:
 	TSubclassOf<ACpp_Building_Base> BuildingClass;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Building")
-	TArray<UStaticMesh*> BuildingMeshes;
+	TArray<FBuildingVisualType> BuildTypes;
 
 	uint8 BuildingMeshIndex;
 
