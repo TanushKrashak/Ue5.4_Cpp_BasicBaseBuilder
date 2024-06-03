@@ -78,7 +78,7 @@ void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
 void ACpp_BuildingVisual::SpawnBuilding() {
 	if (BuildingClass && !IsHidden()) {
 		if (InteractingBuilding && bMaterialIsTrue) {
-			
+			InteractingBuilding->AddInstance(GetActorTransform());
 		}
 		else {
 			GetWorld()->SpawnActor<ACpp_Building_Base>(BuildingClass, GetActorTransform());
@@ -96,7 +96,4 @@ void ACpp_BuildingVisual::CycleMesh() {
 	}
 }
 
-void ACpp_BuildingVisual::AddInstance(const FTransform ActorTransform) {
-	FoundationInstancedMesh->AddInstanceWorldSpace(ActorTransform);
-}
 

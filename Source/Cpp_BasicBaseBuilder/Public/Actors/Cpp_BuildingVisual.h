@@ -81,5 +81,5 @@ public:
 	void SetBuildPosition(const FHitResult HitResult);
 	void SpawnBuilding();
 	void CycleMesh();
-	void AddInstance(const FTransform ActorTransform);
+	
 };

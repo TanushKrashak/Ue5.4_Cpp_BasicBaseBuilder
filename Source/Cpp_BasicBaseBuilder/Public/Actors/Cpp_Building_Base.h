@@ -53,4 +53,5 @@ public:
 	
 	FTransform GetHitSocketTransform(const FHitResult& HitResult, float ValidHitDistance = 100.0f);
 	
+	void AddInstance(const FTransform ActorTransform);
 };

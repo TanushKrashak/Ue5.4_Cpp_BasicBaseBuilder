@@ -103,3 +103,8 @@ FTransform ACpp_Building_Base::GetHitSocketTransform(const FHitResult& HitResult
 	return FTransform();
 }
 
+void ACpp_Building_Base::AddInstance(const FTransform ActorTransform) {
+	FoundationInstancedMesh->AddInstanceWorldSpace(ActorTransform);
+}
+
+
