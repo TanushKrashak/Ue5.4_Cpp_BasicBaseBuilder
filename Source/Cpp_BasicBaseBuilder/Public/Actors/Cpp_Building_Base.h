@@ -8,6 +8,7 @@
 
 // Forward Declarations
 class UInstancedStaticMeshComponent;
+class EBuildType;
 
 UCLASS()
 class CPP_BASICBASEBUILDER_API ACpp_Building_Base : public AActor
@@ -53,5 +54,5 @@ public:
 	
 	FTransform GetHitSocketTransform(const FHitResult& HitResult, float ValidHitDistance = 100.0f);
 	
-	void AddInstance(const FTransform ActorTransform);
+	void AddInstance(const FTransform ActorTransform, EBuildType BuildType);
 };

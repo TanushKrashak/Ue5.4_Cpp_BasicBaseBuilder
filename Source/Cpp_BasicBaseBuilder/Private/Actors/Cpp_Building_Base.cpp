@@ -5,6 +5,7 @@
 #include "Components/InstancedStaticMeshComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "DrawDebugHelpers.h"
+#include "Actors/Cpp_BuildingVisual.h"
 
 
 ACpp_Building_Base::ACpp_Building_Base() {
@@ -103,8 +104,17 @@ FTransform ACpp_Building_Base::GetHitSocketTransform(const FHitResult& HitResult
 	return FTransform();
 }
 
-void ACpp_Building_Base::AddInstance(const FTransform ActorTransform) {
-	FoundationInstancedMesh->AddInstanceWorldSpace(ActorTransform);
+void ACpp_Building_Base::AddInstance(const FTransform ActorTransform, EBuildType BuildType) {
+	switch (BuildType) {
+		case EBuildType::Foundation:
+			FoundationInstancedMesh->AddInstanceWorldSpace(ActorTransform);
+			break;
+		case EBuildType::Wall:
+			WallInstancedMesh->AddInstanceWorldSpace(ActorTransform);
+			break;
+	}
+
+	
 }
 
 
