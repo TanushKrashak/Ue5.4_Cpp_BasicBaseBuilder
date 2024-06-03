@@ -33,8 +33,7 @@ ACpp_Building_Base* ACpp_BuildingVisual::GetHitBuildingActor(const FHitResult& H
 
 void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
 	if (HitResult.bBlockingHit) {
-		SetActorHiddenInGame(false);
-		SetActorLocation(HitResult.Location);
+		SetActorHiddenInGame(false);		
 
 		if (ACpp_Building_Base* HitBuilding = GetHitBuildingActor(HitResult)) {
 			FTransform SocketTransform = HitBuilding->GetHitSocketTransform(HitResult);
@@ -42,7 +41,13 @@ void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
 				SetActorTransform(SocketTransform);
 				return;
 			}
-		}		
+			else {
+				SetActorLocation(HitResult.Location);
+			}
+		}			
+		else {
+			SetActorLocation(HitResult.Location);
+		}
 	}	
 	else {
 		SetActorHiddenInGame(true);
