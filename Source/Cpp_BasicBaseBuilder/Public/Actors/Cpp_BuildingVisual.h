@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "DataTypes.h"
 #include "Cpp_BuildingVisual.generated.h"
 
 
@@ -13,6 +12,23 @@ class UStaticMeshComponent;
 class ACpp_Building_Base;
 class UStaticMesh;
 class UMaterialInstance;
+
+UENUM(BlueprintType)
+enum class EBuildType : uint8 {
+	Foundation	UMETA(DisplayName = "Foundation"),
+	Wall		UMETA(DisplayName = "Wall"),
+};
+
+USTRUCT(BlueprintType)
+struct FBuildingVisualType {
+	GENERATED_BODY()
+
+	UPROPERTY(EditDefaultsOnly, Category = "Building")
+	class UStaticMesh* BuildingMesh;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Building")
+	EBuildType BuildType;
+};
 
 UCLASS()
 class CPP_BASICBASEBUILDER_API ACpp_BuildingVisual : public AActor
@@ -26,8 +42,8 @@ protected:
 	//====================================================================================================================
 	// PROPERTIES & VARIABLES
 	//====================================================================================================================
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Building")
-	UStaticMeshComponent* BuildingMesh;
+	UPROPERTY(EditDefaultsOnly, Category = "Building")
+	UStaticMeshComponent* BuildingMeshThing;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Building")
 	TSubclassOf<ACpp_Building_Base> BuildingClass;

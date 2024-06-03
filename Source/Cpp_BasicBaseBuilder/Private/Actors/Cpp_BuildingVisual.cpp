@@ -6,13 +6,14 @@
 #include "Actors/Cpp_Building_Base.h"
 
 
+
 ACpp_BuildingVisual::ACpp_BuildingVisual() {
 	PrimaryActorTick.bCanEverTick = false;
 
-	BuildingMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BuildingMesh"));
-	RootComponent = BuildingMesh;
+	BuildingMeshThing = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BuildingMeshThing"));
+	RootComponent = BuildingMeshThing;
 
-	BuildingMeshIndex = 0;
+	BuildingTypeIndex = 0;
 	
 	bMaterialIsTrue = false;
 }
@@ -22,14 +23,14 @@ void ACpp_BuildingVisual::BeginPlay() {
 	
 	SetActorHiddenInGame(true);
 
-	if (BuildingMeshes[BuildingMeshIndex]) {
-		BuildingMesh->SetStaticMesh(BuildingMeshes[BuildingMeshIndex]);
+	if (BuildTypes[BuildingTypeIndex].BuildingMesh) {
+		BuildingMeshThing->SetStaticMesh(BuildTypes[BuildingTypeIndex].BuildingMesh);
 
 	}
 	// On start, set the material to the can place material
 	if (MaterialTrue) {
 		bMaterialIsTrue = true;
-		BuildingMesh->SetMaterial(0, MaterialTrue);
+		BuildingMeshThing->SetMaterial(0, MaterialTrue);
 	}
 }
 
@@ -48,14 +49,14 @@ void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
 				// Set the material to the true material
 				if (MaterialTrue && !bMaterialIsTrue) {
 					bMaterialIsTrue = true;
-					BuildingMesh->SetMaterial(0, MaterialTrue);
+					BuildingMeshThing->SetMaterial(0, MaterialTrue);
 				}
 				return;
 			}
 			else {
 				if (MaterialFalse && bMaterialIsTrue) {
 					bMaterialIsTrue = false;
-					BuildingMesh->SetMaterial(0, MaterialFalse);
+					BuildingMeshThing->SetMaterial(0, MaterialFalse);
 				}
 				SetActorLocation(HitResult.Location);
 			}
@@ -76,11 +77,11 @@ void ACpp_BuildingVisual::SpawnBuilding() {
 }
 
 void ACpp_BuildingVisual::CycleMesh() {
-	if (++BuildingMeshIndex >= BuildingMeshes.Num()) {
-		BuildingMeshIndex = 0;
+	if (++BuildingTypeIndex >= BuildTypes.Num()) {
+		BuildingTypeIndex = 0;
 	}
-	if (BuildingMeshes[BuildingMeshIndex]) {
-		BuildingMesh->SetStaticMesh(BuildingMeshes[BuildingMeshIndex]);
+	if (BuildTypes[BuildingTypeIndex].BuildingMesh) {
+		BuildingMeshThing->SetStaticMesh(BuildTypes[BuildingTypeIndex].BuildingMesh);
 
 	}
 }
