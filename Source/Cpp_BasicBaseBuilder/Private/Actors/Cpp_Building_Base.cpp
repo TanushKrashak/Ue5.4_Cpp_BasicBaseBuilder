@@ -40,12 +40,10 @@ void ACpp_Building_Base::DestroyInstance(FVector HitPoint) {
 FTransform ACpp_Building_Base::GetInstancedSocketTransform(UInstancedStaticMeshComponent* InstancedComp, int32 InstanceIndex, 
 														   const FName& SocketName) {	
 	if (InstancedComp && InstancedComp->IsValidInstance(InstanceIndex)) {
-		FTransform InstanceTransform = FTransform();
-		// Log socket name
-		UE_LOG(LogTemp, Warning, TEXT("Socket Name: %s"), *SocketName.ToString());
+		FTransform InstanceTransform = FTransform();				
 		InstancedComp->GetInstanceTransform(InstanceIndex, InstanceTransform, true);
-		FTransform SocketTransform = InstancedComp->GetSocketTransform(SocketName, ERelativeTransformSpace::RTS_Component);
-		InstanceTransform *= SocketTransform;
+		FTransform SocketTransform = InstancedComp->GetSocketTransform(SocketName, RTS_Component);
+		InstanceTransform = SocketTransform * InstanceTransform;
 		return InstanceTransform;
 	}
 	return FTransform();
