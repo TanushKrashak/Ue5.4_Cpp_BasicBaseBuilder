@@ -28,6 +28,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Building")
 	UInstancedStaticMeshComponent* WallInstancedMesh;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Building")
+	UInstancedStaticMeshComponent* CeilingInstancedMesh;
+
 	TArray<FName> MeshInstanceSockets;
 
 	//====================================================================================================================
