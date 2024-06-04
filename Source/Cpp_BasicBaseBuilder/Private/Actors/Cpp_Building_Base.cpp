@@ -37,13 +37,21 @@ void ACpp_Building_Base::DestroyInstance(FVector HitPoint) {
 	}
 }
 
-FTransform ACpp_Building_Base::GetInstancedSocketTransform(UInstancedStaticMeshComponent* InstancedComp, int32 InstanceIndex, 
-														   const FName& SocketName) {	
+FTransform ACpp_Building_Base::GetInstancedSocketTransform(UInstancedStaticMeshComponent* InstancedComp, int32 InstanceIndex, const FName& SocketName) {	
 	if (InstancedComp && InstancedComp->IsValidInstance(InstanceIndex)) {
 		FTransform InstanceTransform = FTransform();				
 		InstancedComp->GetInstanceTransform(InstanceIndex, InstanceTransform, true);
 		FTransform SocketTransform = InstancedComp->GetSocketTransform(SocketName, RTS_Component);
 		InstanceTransform = SocketTransform * InstanceTransform;
+
+		// DEBUGGING DRAW FUNCTIONS
+		DrawDebugString(GetWorld(), InstanceTransform.GetLocation(), SocketName.ToString(), nullptr, FColor::White, 5.0f, true);
+		DrawDebugSphere(GetWorld(), InstanceTransform.GetLocation(), 5.0f, 10, FColor::Red);
+		FTransform temp;
+		InstancedComp->GetInstanceTransform(InstanceIndex, temp, true);
+		DrawDebugSphere(GetWorld(), temp.GetLocation(), 5.0f, 15, FColor::Blue);
+
+
 		return InstanceTransform;
 	}
 	return FTransform();
@@ -93,16 +101,18 @@ int32 ACpp_Building_Base::GetHitIndex(const FHitResult& HitResult) {
 }
 
 FTransform ACpp_Building_Base::GetHitSocketTransform(const FHitResult& HitResult, float ValidHitDistance /*= 100.0f*/) {
-	int32 HitIndex = GetHitIndex(HitResult);
-	if (HitIndex != -1) {		
-		for (const FName& SocketName : FoundationSockets) {
-			FTransform SocketTransform = GetInstancedSocketTransform(FoundationInstancedMesh, HitIndex, SocketName);
-			if (FVector::Distance(SocketTransform.GetLocation(), HitResult.Location) <= ValidHitDistance) {			
-				
-				return SocketTransform;				
+	if (UInstancedStaticMeshComponent* HitComp = Cast<UInstancedStaticMeshComponent>(HitResult.GetComponent())) {
+		int32 HitIndex = GetHitIndex(HitResult);
+		if (HitIndex != -1) {
+			for (const FName& SocketName : FoundationSockets) {
+				FTransform SocketTransform = GetInstancedSocketTransform(HitComp, HitIndex, SocketName);
+				if (FVector::Distance(SocketTransform.GetLocation(), HitResult.Location) <= ValidHitDistance) {
+
+					return SocketTransform;
+				}
 			}
-		}		
-		
+
+		}
 	}
 	return FTransform();
 }
