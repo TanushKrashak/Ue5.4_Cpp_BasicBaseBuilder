@@ -36,7 +36,7 @@ void ACpp_Building_Base::DestroyInstance(FVector HitPoint) {
 }
 
 FTransform ACpp_Building_Base::GetInstancedSocketTransform(UInstancedStaticMeshComponent* InstancedComp, int32 InstanceIndex, 
-														   const FName& SocketName) {\
+														   const FName& SocketName) {
 	if (InstancedComp && InstancedComp->IsValidInstance(InstanceIndex)) {
 		FTransform InstanceTransform = FTransform();
 		InstancedComp->GetInstanceTransform(InstanceIndex, InstanceTransform, true);
@@ -44,7 +44,7 @@ FTransform ACpp_Building_Base::GetInstancedSocketTransform(UInstancedStaticMeshC
 		InstanceTransform *= SocketTransform;
 		return InstanceTransform;
 	}
-	
+	return FTransform();
 	// OLD CODE (KEEPING FOR REFERENCE)
 	/*
 	// Check if the instanced component & instance index are valid
@@ -109,10 +109,10 @@ FTransform ACpp_Building_Base::GetHitSocketTransform(const FHitResult& HitResult
 void ACpp_Building_Base::AddInstance(const FTransform ActorTransform, EBuildType BuildType) {
 	switch (BuildType) {
 		case EBuildType::Foundation:
-			FoundationInstancedMesh->AddInstanceWorldSpace(ActorTransform);
+			FoundationInstancedMesh->AddInstance(ActorTransform, true);
 			break;
 		case EBuildType::Wall:
-			WallInstancedMesh->AddInstanceWorldSpace(ActorTransform);
+			WallInstancedMesh->AddInstance(ActorTransform, true);
 			break;
 	}
 
