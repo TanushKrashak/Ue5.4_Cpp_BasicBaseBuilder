@@ -56,6 +56,10 @@ void ACpp_BuildingVisual::ReturnMeshToSelected() {
 	}
 }
 
+bool ACpp_BuildingVisual::IsValidSocket(UInstancedStaticMeshComponent* HitComp, const FName SocketName) {
+
+}
+
 void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
 	// If we hit something
 	if (HitResult.bBlockingHit) {
