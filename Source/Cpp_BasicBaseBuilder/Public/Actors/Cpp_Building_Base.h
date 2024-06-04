@@ -47,8 +47,7 @@ public:
 	void DestroyInstance(FVector HitPoint);
 		
 	UFUNCTION(BlueprintCallable, Category = "Building")
-	FTransform GetInstancedSocketTransform(UInstancedStaticMeshComponent* InstancedComp, int32 InstanceIndex, const FName& SocketName, 
-										   bool& Success, bool WorldSpace = false);
+	FTransform GetInstancedSocketTransform(UInstancedStaticMeshComponent* InstancedComp, int32 InstanceIndex, const FName& SocketName);
 
 	int32 GetHitIndex(const FHitResult& HitResult);
 	
@@ -56,3 +55,4 @@ public:
 	
 	void AddInstance(const FTransform ActorTransform, EBuildType BuildType);
 };
+

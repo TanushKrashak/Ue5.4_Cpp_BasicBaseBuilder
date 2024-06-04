@@ -36,9 +36,17 @@ void ACpp_Building_Base::DestroyInstance(FVector HitPoint) {
 }
 
 FTransform ACpp_Building_Base::GetInstancedSocketTransform(UInstancedStaticMeshComponent* InstancedComp, int32 InstanceIndex, 
-														   const FName& SocketName, bool& Success, bool WorldSpace) {
-	// Set the success to false by default
-	Success = true;
+														   const FName& SocketName) {\
+	if (InstancedComp && InstancedComp->IsValidInstance(InstanceIndex)) {
+		FTransform InstanceTransform = FTransform();
+		InstancedComp->GetInstanceTransform(InstanceIndex, InstanceTransform, true);
+		FTransform SocketTransform = InstancedComp->GetSocketTransform(SocketName, ERelativeTransformSpace::RTS_Component);
+		InstanceTransform *= SocketTransform;
+		return InstanceTransform;
+	}
+	
+	// OLD CODE (KEEPING FOR REFERENCE)
+	/*
 	// Check if the instanced component & instance index are valid
 	if (InstancedComp && InstancedComp->IsValidInstance(InstanceIndex)) {
 		
@@ -52,7 +60,6 @@ FTransform ACpp_Building_Base::GetInstancedSocketTransform(UInstancedStaticMeshC
 
 		// Check if the socket transform is equal to the default transform, if so return false
 		if (SocketTransform.Equals(FTransform())) {
-			Success = false;
 			return FTransform();
 		}
 
@@ -74,9 +81,9 @@ FTransform ACpp_Building_Base::GetInstancedSocketTransform(UInstancedStaticMeshC
 		// Change the Z value of Relative Transform to be the sum of the Z values of the Instance and Socket transforms
 		RelativeTransform.SetLocation(RelativeLocation);
 		return RelativeTransform;
-	}
-	Success = false;
+	}	
 	return FTransform();
+	*/
 }
 
 int32 ACpp_Building_Base::GetHitIndex(const FHitResult& HitResult) {
