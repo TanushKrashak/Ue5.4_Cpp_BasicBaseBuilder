@@ -29,6 +29,7 @@ void ACpp_Building_Base::BeginPlay() {
 	// Get all the socket names of the instanced mesh component
 	MeshInstanceSockets = FoundationInstancedMesh->GetAllSocketNames();
 	MeshInstanceSockets.Append(WallInstancedMesh->GetAllSocketNames());
+	MeshInstanceSockets.Append(CeilingInstancedMesh->GetAllSocketNames());
 }
 
 bool ACpp_Building_Base::IsValidSocket(UInstancedStaticMeshComponent* HitComp, const FName Filter, const FName& SocketName) {
