@@ -29,6 +29,7 @@ protected:
 	UInstancedStaticMeshComponent* WallInstancedMesh;
 
 	TArray<FName> FoundationSockets;
+	TArray<FName> WallSockets;
 
 	//====================================================================================================================
 	// FUNCTIONS

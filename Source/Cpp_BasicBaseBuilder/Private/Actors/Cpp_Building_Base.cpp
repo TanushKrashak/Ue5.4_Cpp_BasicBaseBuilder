@@ -27,6 +27,7 @@ void ACpp_Building_Base::BeginPlay() {
 	
 	// Get all the socket names of the instanced mesh component
 	FoundationSockets = FoundationInstancedMesh->GetAllSocketNames();
+	WallSockets = WallInstancedMesh->GetAllSocketNames();
 }
 
 void ACpp_Building_Base::DestroyInstance(FVector HitPoint) {
