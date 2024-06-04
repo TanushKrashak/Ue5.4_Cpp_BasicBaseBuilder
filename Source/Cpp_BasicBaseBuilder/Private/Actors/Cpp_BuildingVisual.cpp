@@ -58,8 +58,10 @@ void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
 	if (HitResult.bBlockingHit) {
 		SetActorHiddenInGame(false);		
 		InteractingBuilding = GetHitBuildingActor(HitResult);
+
 		// If we hit a building
 		if (InteractingBuilding) {
+			ReturnMeshToSelected();
 			FTransform SocketTransform = InteractingBuilding->GetHitSocketTransform(HitResult, 25.0f);
 			// If socket transform was changed
 			if (!SocketTransform.Equals(FTransform())) {
