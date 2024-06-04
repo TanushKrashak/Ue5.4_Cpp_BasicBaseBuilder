@@ -45,7 +45,7 @@ void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
 		InteractingBuilding = GetHitBuildingActor(HitResult);
 		// If we hit a building
 		if (InteractingBuilding) {
-			FTransform SocketTransform = InteractingBuilding->GetHitSocketTransform(HitResult);
+			FTransform SocketTransform = InteractingBuilding->GetHitSocketTransform(HitResult, 25.0f);
 			// If socket transform was changed
 			if (!SocketTransform.Equals(FTransform())) {
 				SetActorTransform(SocketTransform);

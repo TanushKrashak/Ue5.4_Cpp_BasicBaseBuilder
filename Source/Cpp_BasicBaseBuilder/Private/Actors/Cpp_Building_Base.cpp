@@ -80,12 +80,7 @@ FTransform ACpp_Building_Base::GetInstancedSocketTransform(UInstancedStaticMeshC
 }
 
 int32 ACpp_Building_Base::GetHitIndex(const FHitResult& HitResult) {
-	TArray<int32> HitIndexes = FoundationInstancedMesh->GetInstancesOverlappingSphere(HitResult.Location, 5.0f);	
-	DrawDebugSphere(GetWorld(), HitResult.Location, 2.0f, 10.0f, FColor::Red);
-	if (HitIndexes.Num()) {
-		return HitIndexes[0];
-	}
-	return -1;
+	return HitResult.Item;
 }
 
 FTransform ACpp_Building_Base::GetHitSocketTransform(const FHitResult& HitResult, float ValidHitDistance /*= 100.0f*/) {
