@@ -28,8 +28,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Building")
 	UInstancedStaticMeshComponent* WallInstancedMesh;
 
-	TArray<FName> FoundationSockets;
-	TArray<FName> WallSockets;
+	TArray<FName> MeshInstanceSockets;
 
 	//====================================================================================================================
 	// FUNCTIONS

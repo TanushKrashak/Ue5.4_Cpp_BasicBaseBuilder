@@ -26,8 +26,8 @@ void ACpp_Building_Base::BeginPlay() {
 	FoundationInstancedMesh->SetWorldTransform(GetActorTransform());
 	
 	// Get all the socket names of the instanced mesh component
-	FoundationSockets = FoundationInstancedMesh->GetAllSocketNames();
-	WallSockets = WallInstancedMesh->GetAllSocketNames();
+	MeshInstanceSockets = FoundationInstancedMesh->GetAllSocketNames();
+	MeshInstanceSockets.Append(WallInstancedMesh->GetAllSocketNames());
 }
 
 void ACpp_Building_Base::DestroyInstance(FVector HitPoint) {
@@ -105,7 +105,7 @@ FTransform ACpp_Building_Base::GetHitSocketTransform(const FHitResult& HitResult
 	if (UInstancedStaticMeshComponent* HitComp = Cast<UInstancedStaticMeshComponent>(HitResult.GetComponent())) {
 		int32 HitIndex = GetHitIndex(HitResult);
 		if (HitIndex != -1) {
-			for (const FName& SocketName : FoundationSockets) {
+			for (const FName& SocketName : MeshInstanceSockets) {
 				FTransform SocketTransform = GetInstancedSocketTransform(HitComp, HitIndex, SocketName);
 				if (FVector::Distance(SocketTransform.GetLocation(), HitResult.Location) <= ValidHitDistance) {
 
