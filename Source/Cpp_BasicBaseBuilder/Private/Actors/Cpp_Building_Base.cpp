@@ -106,10 +106,12 @@ FTransform ACpp_Building_Base::GetHitSocketTransform(const FHitResult& HitResult
 		int32 HitIndex = GetHitIndex(HitResult);
 		if (HitIndex != -1) {
 			for (const FName& SocketName : MeshInstanceSockets) {
-				FTransform SocketTransform = GetInstancedSocketTransform(HitComp, HitIndex, SocketName);
-				if (FVector::Distance(SocketTransform.GetLocation(), HitResult.Location) <= ValidHitDistance) {
+				if (HitComp->DoesSocketExist(SocketName)) {
+					FTransform SocketTransform = GetInstancedSocketTransform(HitComp, HitIndex, SocketName);
+					if (FVector::Distance(SocketTransform.GetLocation(), HitResult.Location) <= ValidHitDistance) {
 
-					return SocketTransform;
+						return SocketTransform;
+					}
 				}
 			}
 
