@@ -40,6 +40,7 @@ ACpp_Building_Base* ACpp_BuildingVisual::GetHitBuildingActor(const FHitResult& H
 }
 
 void ACpp_BuildingVisual::SetMeshTo(EBuildType BuildType) {	
+	bReturnedMesh = false;
 	for (FBuildingVisualType& Building : BuildTypes) {
 		if (Building.BuildType == BuildType) {
 			BuildingMeshThing->SetStaticMesh(Building.BuildingMesh);
@@ -49,6 +50,7 @@ void ACpp_BuildingVisual::SetMeshTo(EBuildType BuildType) {
 }
 
 void ACpp_BuildingVisual::ReturnMeshToSelected() {
+	bReturnedMesh = true;
 	if (BuildTypes[BuildingTypeIndex].BuildingMesh) {
 		BuildingMeshThing->SetStaticMesh(BuildTypes[BuildingTypeIndex].BuildingMesh);
 	}
@@ -62,7 +64,12 @@ void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
 
 		// If we hit a building
 		if (InteractingBuilding) {
-			ReturnMeshToSelected();
+			// If we haven't returned the mesh yet
+			if (!bReturnedMesh) {
+				ReturnMeshToSelected();
+				bReturnedMesh = false;
+			}
+
 			FTransform SocketTransform = InteractingBuilding->GetHitSocketTransform(HitResult, 25.0f);
 			// If socket transform was changed
 			if (!SocketTransform.Equals(FTransform())) {
@@ -83,7 +90,9 @@ void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
 			}
 		}			
 		else {
-			SetMeshTo(EBuildType::Foundation);
+			if (bReturnedMesh) {
+				SetMeshTo(EBuildType::Foundation);
+			}
 			SetActorLocation(HitResult.Location);
 		}
 	}	

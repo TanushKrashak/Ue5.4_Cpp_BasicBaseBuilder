@@ -59,6 +59,7 @@ protected:
 	UMaterialInstance* MaterialTrue;
 
 	bool bMaterialIsTrue;
+	bool bReturnedMesh;
 
 	ACpp_Building_Base* InteractingBuilding;
 
