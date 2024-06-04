@@ -77,8 +77,10 @@ void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
 
 void ACpp_BuildingVisual::SpawnBuilding() {
 	if (BuildingClass && !IsHidden()) {
-		if (InteractingBuilding && bMaterialIsTrue) {
-			InteractingBuilding->AddInstance(GetActorTransform(), BuildTypes[BuildingTypeIndex].BuildType);
+		if (InteractingBuilding) {
+			if (bMaterialIsTrue) {
+				InteractingBuilding->AddInstance(GetActorTransform(), BuildTypes[BuildingTypeIndex].BuildType);
+			}
 		}
 		else {
 			GetWorld()->SpawnActor<ACpp_Building_Base>(BuildingClass, GetActorTransform());
