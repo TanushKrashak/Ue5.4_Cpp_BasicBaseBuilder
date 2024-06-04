@@ -143,6 +143,12 @@ void ACpp_Building_Base::AddInstance(const FTransform ActorTransform, EBuildType
 		case EBuildType::Wall:
 			WallInstancedMesh->AddInstance(ActorTransform, true);
 			break;
+		case EBuildType::Ceiling:
+			CeilingInstancedMesh->AddInstance(ActorTransform, true);
+			break;
+		default:
+			UE_LOG(LogTemp, Error, TEXT("Invalid Build Type"));
+			break;
 	}
 
 	

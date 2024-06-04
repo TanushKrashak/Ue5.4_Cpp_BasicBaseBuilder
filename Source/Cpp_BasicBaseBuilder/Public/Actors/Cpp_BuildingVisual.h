@@ -17,6 +17,7 @@ UENUM(BlueprintType)
 enum class EBuildType : uint8 {
 	Foundation	UMETA(DisplayName = "Foundation"),
 	Wall		UMETA(DisplayName = "Wall"),
+	Ceiling		UMETA(DisplayName = "Ceiling")
 };
 
 USTRUCT(BlueprintType)
