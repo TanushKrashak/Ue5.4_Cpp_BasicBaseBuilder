@@ -38,7 +38,7 @@ ACpp_Building_Base* ACpp_BuildingVisual::GetHitBuildingActor(const FHitResult& H
 	return Cast<ACpp_Building_Base>(HitResult.GetActor());
 }
 
-void ACpp_BuildingVisual::SetMeshTo(EBuildType BuildType) {
+void ACpp_BuildingVisual::SetMeshTo(EBuildType BuildType) {	
 	for (FBuildingVisualType& Building : BuildTypes) {
 		if (Building.BuildType == BuildType) {
 			BuildingMeshThing->SetStaticMesh(Building.BuildingMesh);
@@ -80,6 +80,7 @@ void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
 			}
 		}			
 		else {
+			SetMeshTo(EBuildType::Foundation);
 			SetActorLocation(HitResult.Location);
 		}
 	}	
