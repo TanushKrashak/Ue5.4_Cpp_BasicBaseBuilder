@@ -69,6 +69,8 @@ protected:
 
 	ACpp_Building_Base* GetHitBuildingActor(const FHitResult& HitResult);
 
+	void SetMeshTo(EBuildType BuildType);
+
 public:
 	//====================================================================================================================
 	// PROPERTIES & VARIABLES

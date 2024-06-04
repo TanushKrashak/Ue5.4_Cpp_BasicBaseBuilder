@@ -40,7 +40,7 @@ ACpp_Building_Base* ACpp_BuildingVisual::GetHitBuildingActor(const FHitResult& H
 
 void ACpp_BuildingVisual::SetMeshTo(EBuildType BuildType) {
 	for (FBuildingVisualType& Building : BuildTypes) {
-		//if (Building.BuildType == BuildType) {
+		if (Building.BuildType == BuildType) {
 			BuildingMeshThing->SetStaticMesh(Building.BuildingMesh);
 			return;
 		}
