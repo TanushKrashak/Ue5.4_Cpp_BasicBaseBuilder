@@ -35,6 +35,7 @@ protected:
 	//====================================================================================================================	
 	virtual void BeginPlay() override;
 
+	bool IsValidSocket(UInstancedStaticMeshComponent* HitComp, const FName SocketName);
 
 public:
 	//====================================================================================================================

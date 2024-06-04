@@ -75,8 +75,7 @@ protected:
 
 	void SetMeshTo(EBuildType BuildType);
 	void ReturnMeshToSelected();
-
-	bool IsValidSocket(UInstancedStaticMeshComponent* HitComp, const FName SocketName);
+	
 
 public:
 	//====================================================================================================================

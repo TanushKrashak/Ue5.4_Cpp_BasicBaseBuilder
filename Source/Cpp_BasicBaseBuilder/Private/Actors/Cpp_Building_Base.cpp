@@ -30,6 +30,20 @@ void ACpp_Building_Base::BeginPlay() {
 	MeshInstanceSockets.Append(WallInstancedMesh->GetAllSocketNames());
 }
 
+bool ACpp_BuildingVisual::IsValidSocket(UInstancedStaticMeshComponent* HitComp, const FName Filter, const FName& SocketName) {
+	bool bSuccess = true;
+	if (!HitComp->DoesSocketExist(SocketName)) {
+		bSuccess = false;
+		return bSuccess;
+	}
+	// Check if socketName contains the filter
+	if (!SocketName.ToString().Contains(Filter.ToString(), ESearchCase::CaseSensitive)) {
+		bSuccess = false;
+		return bSuccess;
+	}
+	return true;
+}
+
 void ACpp_Building_Base::DestroyInstance(FVector HitPoint) {
 	const TArray<int32> HitIndexes = FoundationInstancedMesh->GetInstancesOverlappingSphere(HitPoint, 1.0f);
 
@@ -106,7 +120,7 @@ FTransform ACpp_Building_Base::GetHitSocketTransform(const FHitResult& HitResult
 		int32 HitIndex = GetHitIndex(HitResult);
 		if (HitIndex != -1) {
 			for (const FName& SocketName : MeshInstanceSockets) {
-				if (HitComp->DoesSocketExist(SocketName)) {
+				if (IsValidSocket(HitComp, Filter, SocketName)) {
 					FTransform SocketTransform = GetInstancedSocketTransform(HitComp, HitIndex, SocketName);
 					if (FVector::Distance(SocketTransform.GetLocation(), HitResult.Location) <= ValidHitDistance) {
 
