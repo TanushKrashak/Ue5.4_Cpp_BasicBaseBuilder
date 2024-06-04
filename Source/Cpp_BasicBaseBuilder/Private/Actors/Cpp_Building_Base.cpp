@@ -30,7 +30,7 @@ void ACpp_Building_Base::BeginPlay() {
 	MeshInstanceSockets.Append(WallInstancedMesh->GetAllSocketNames());
 }
 
-bool ACpp_BuildingVisual::IsValidSocket(UInstancedStaticMeshComponent* HitComp, const FName Filter, const FName& SocketName) {
+bool ACpp_Building_Base::IsValidSocket(UInstancedStaticMeshComponent* HitComp, const FName Filter, const FName& SocketName) {
 	bool bSuccess = true;
 	if (!HitComp->DoesSocketExist(SocketName)) {
 		bSuccess = false;
