@@ -41,7 +41,7 @@ ACpp_Building_Base* ACpp_BuildingVisual::GetHitBuildingActor(const FHitResult& H
 
 void ACpp_BuildingVisual::SetMeshTo(EBuildType BuildType) {	
 	bReturnedMesh = false;
-	for (FBuildingVisualType& Building : BuildTypes) {
+	for (const FBuildingVisualType& Building : BuildTypes) {
 		if (Building.BuildType == BuildType) {
 			BuildingMeshThing->SetStaticMesh(Building.BuildingMesh);
 			return;
@@ -66,8 +66,7 @@ void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
 		if (InteractingBuilding) {
 			// If we haven't returned the mesh yet
 			if (!bReturnedMesh) {
-				ReturnMeshToSelected();
-				bReturnedMesh = false;
+				ReturnMeshToSelected();		
 			}
 
 			FTransform SocketTransform = InteractingBuilding->GetHitSocketTransform(HitResult, 25.0f);
@@ -117,11 +116,13 @@ void ACpp_BuildingVisual::SpawnBuilding() {
 }	
 
 void ACpp_BuildingVisual::CycleMesh() {
-	if (++BuildingTypeIndex >= BuildTypes.Num()) {
-		BuildingTypeIndex = 0;
-	}
-	if (BuildTypes[BuildingTypeIndex].BuildingMesh) {
-		BuildingMeshThing->SetStaticMesh(BuildTypes[BuildingTypeIndex].BuildingMesh);
+	if (bReturnedMesh) {
+		if (++BuildingTypeIndex >= BuildTypes.Num()) {
+			BuildingTypeIndex = 0;
+		}
+		if (BuildTypes[BuildingTypeIndex].BuildingMesh) {
+			BuildingMeshThing->SetStaticMesh(BuildTypes[BuildingTypeIndex].BuildingMesh);
+		}
 	}
 }
 
