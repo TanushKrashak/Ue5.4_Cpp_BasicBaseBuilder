@@ -28,6 +28,9 @@ struct FBuildingVisualType {
 
 	UPROPERTY(EditDefaultsOnly, Category = "Building")
 	EBuildType BuildType;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Building")
+	FName FilterCharacter;
 };
 
 UCLASS()

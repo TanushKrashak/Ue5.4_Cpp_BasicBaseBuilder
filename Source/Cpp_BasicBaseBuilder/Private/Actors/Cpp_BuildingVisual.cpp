@@ -68,8 +68,8 @@ void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
 			if (!bReturnedMesh) {
 				ReturnMeshToSelected();		
 			}
-
-			FTransform SocketTransform = InteractingBuilding->GetHitSocketTransform(HitResult, 25.0f);
+			
+			FTransform SocketTransform = InteractingBuilding->GetHitSocketTransform(HitResult, BuildTypes[BuildingTypeIndex].FilterCharacter, 25.0f);
 			// If socket transform was changed
 			if (!SocketTransform.Equals(FTransform())) {
 				SetActorTransform(SocketTransform);

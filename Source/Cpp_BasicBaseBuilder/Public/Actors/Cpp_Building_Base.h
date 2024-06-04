@@ -53,7 +53,7 @@ public:
 
 	int32 GetHitIndex(const FHitResult& HitResult);
 	
-	FTransform GetHitSocketTransform(const FHitResult& HitResult, float ValidHitDistance = 100.0f);
+	FTransform GetHitSocketTransform(const FHitResult& HitResult, const FName& Filter, float ValidHitDistance = 100.0f);
 	
 	void AddInstance(const FTransform ActorTransform, EBuildType BuildType);
 };
