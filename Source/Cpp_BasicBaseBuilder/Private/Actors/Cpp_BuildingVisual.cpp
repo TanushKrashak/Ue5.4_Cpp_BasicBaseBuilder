@@ -47,6 +47,10 @@ void ACpp_BuildingVisual::SetMeshTo(EBuildType BuildType) {
 	}
 }
 
+void ACpp_BuildingVisual::ReturnMeshToSelected() {
+
+}
+
 void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
 	// If we hit something
 	if (HitResult.bBlockingHit) {
