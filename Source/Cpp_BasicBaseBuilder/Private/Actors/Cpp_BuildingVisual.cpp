@@ -48,7 +48,9 @@ void ACpp_BuildingVisual::SetMeshTo(EBuildType BuildType) {
 }
 
 void ACpp_BuildingVisual::ReturnMeshToSelected() {
-
+	if (BuildTypes[BuildingTypeIndex].BuildingMesh) {
+		BuildingMeshThing->SetStaticMesh(BuildTypes[BuildingTypeIndex].BuildingMesh);
+	}
 }
 
 void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
@@ -107,7 +109,6 @@ void ACpp_BuildingVisual::CycleMesh() {
 	}
 	if (BuildTypes[BuildingTypeIndex].BuildingMesh) {
 		BuildingMeshThing->SetStaticMesh(BuildTypes[BuildingTypeIndex].BuildingMesh);
-
 	}
 }
 
