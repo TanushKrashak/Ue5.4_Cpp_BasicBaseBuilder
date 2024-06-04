@@ -16,6 +16,7 @@ ACpp_BuildingVisual::ACpp_BuildingVisual() {
 	BuildingTypeIndex = 0;
 	
 	bMaterialIsTrue = false;
+	bReturnedMesh = true;
 }
 
 void ACpp_BuildingVisual::BeginPlay() {
