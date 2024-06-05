@@ -26,7 +26,7 @@ void ACpp_Building_Base::BeginPlay() {
 	BuildingSocketData.InstancedComponent = FoundationInstancedMesh;
 	BuildingSocketData.Index = 0;
 	BuildingSocketData.SocketName = NAME_None;
-	BuildingSocketData.SocketTransform = FTransform();
+	BuildingSocketData.SocketTransform = GetActorTransform();
 	AddInstance(BuildingSocketData, EBuildType::Foundation);
 
 	// Set its transform to the actor's transform
