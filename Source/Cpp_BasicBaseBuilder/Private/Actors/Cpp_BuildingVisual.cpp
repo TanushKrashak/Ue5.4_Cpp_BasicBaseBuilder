@@ -114,9 +114,16 @@ void ACpp_BuildingVisual::SpawnBuilding() {
 		}		
 	}
 }	
-void ACpp_BuildingVisual::DestroyInstance() {
+void ACpp_BuildingVisual::DestroyInstance(const FHitResult& HitResult) {
 	if (InteractingBuilding) {
-		InteractingBuilding->DestroyInstance(SocketData);
+		// If we hit an instanced static mesh component, destroy the instance
+		if (UInstancedStaticMeshComponent* InstancedStaticMeshComponent = Cast<UInstancedStaticMeshComponent>(HitResult.GetComponent())) {
+			FBuildingSocketData BuildingSocketData;
+			BuildingSocketData.InstancedComponent = InstancedStaticMeshComponent;
+			BuildingSocketData.Index = HitResult.Item;
+			InteractingBuilding->DestroyInstance(BuildingSocketData);
+		}
+		
 	}
 }
 void ACpp_BuildingVisual::CycleMesh() {

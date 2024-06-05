@@ -125,7 +125,7 @@ public:
 	//====================================================================================================================
 	void SetBuildPosition(const FHitResult HitResult);
 	void SpawnBuilding();
-	void DestroyInstance();
+	void DestroyInstance(const FHitResult& HitResult);
 	void CycleMesh();
 
 	
