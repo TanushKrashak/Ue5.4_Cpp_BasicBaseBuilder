@@ -106,7 +106,7 @@ void ACpp_BuildingVisual::SpawnBuilding() {
 	if (BuildingClass && !IsHidden()) {
 		if (InteractingBuilding) {
 			if (bMaterialIsTrue) {
-				InteractingBuilding->AddInstance(GetActorTransform(), BuildTypes[BuildingTypeIndex].BuildType);
+				InteractingBuilding->AddInstance(SocketData);
 			}
 		}
 		else {

@@ -58,6 +58,6 @@ public:
 	int32 GetHitIndex(const FHitResult& HitResult);
 	FBuildingSocketData GetHitSocketTransform(const FHitResult& HitResult, const FName& Filter, float ValidHitDistance = 100.0f);
 	
-	void AddInstance(const FTransform ActorTransform, EBuildType BuildType);
+	void AddInstance(const FBuildingSocketData& BuildingSocketData);
 };
 

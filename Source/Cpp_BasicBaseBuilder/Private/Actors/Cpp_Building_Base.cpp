@@ -143,7 +143,13 @@ FBuildingSocketData ACpp_Building_Base::GetHitSocketTransform(const FHitResult& 
 	return SocketData;
 }
 
-void ACpp_Building_Base::AddInstance(const FTransform ActorTransform, EBuildType BuildType) {
+void ACpp_Building_Base::AddInstance(const FBuildingSocketData& BuildingSocketData) {
+	if (BuildingSocketData.InstancedComponent) {
+		BuildingSocketData.InstancedComponent->AddInstance(BuildingSocketData.SocketTransform, true);
+	}
+
+	// OLD CODE (KEEPING FOR REFERENCE)
+	/*
 	switch (BuildType) {
 		case EBuildType::Foundation:
 			FoundationInstancedMesh->AddInstance(ActorTransform, true);
@@ -158,7 +164,7 @@ void ACpp_Building_Base::AddInstance(const FTransform ActorTransform, EBuildType
 			UE_LOG(LogTemp, Error, TEXT("Invalid Build Type"));
 			break;
 	}
-
+	*/
 	
 }
 
