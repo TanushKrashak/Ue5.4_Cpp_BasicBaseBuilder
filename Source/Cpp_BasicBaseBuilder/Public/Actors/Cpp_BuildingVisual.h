@@ -34,6 +34,16 @@ struct FBuildingVisualType {
 	FName FilterCharacter;
 };
 
+USTRUCT(BlueprintType)
+struct FBuildingSocketData {
+	GENERATED_BODY()
+	
+	class UInstancedStaticMeshComponent* InstancedComponent;	
+	int32 Index;	
+	FName SocketName;
+	FTransform SocketTransform;
+};
+
 UCLASS()
 class CPP_BASICBASEBUILDER_API ACpp_BuildingVisual : public AActor
 {
