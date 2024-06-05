@@ -53,7 +53,7 @@ public:
 	// FUNCTIONS
 	//====================================================================================================================
 	UFUNCTION(BlueprintCallable, Category = "Building")
-	void DestroyInstance(FVector HitPoint);
+	void DestroyInstance(const FBuildingSocketData& BuildingSocketData);
 		
 	UFUNCTION(BlueprintCallable, Category = "Building")
 	FTransform GetInstancedSocketTransform(UInstancedStaticMeshComponent* InstancedComp, int32 InstanceIndex, const FName& SocketName);

@@ -80,11 +80,9 @@ bool ACpp_Building_Base::IsValidSocket(UInstancedStaticMeshComponent* HitComp, i
 	return true;
 }
 
-void ACpp_Building_Base::DestroyInstance(FVector HitPoint) {
-	const TArray<int32> HitIndexes = FoundationInstancedMesh->GetInstancesOverlappingSphere(HitPoint, 1.0f);
-
-	if (HitIndexes.Num() > 0) {
-		FoundationInstancedMesh->RemoveInstance(HitIndexes[0]);
+void ACpp_Building_Base::DestroyInstance(const FBuildingSocketData& BuildingSocketData) {
+	if (BuildingSocketData.InstancedComponent) {
+		BuildingSocketData.InstancedComponent->RemoveInstance(BuildingSocketData.Index);
 	}
 }
 
