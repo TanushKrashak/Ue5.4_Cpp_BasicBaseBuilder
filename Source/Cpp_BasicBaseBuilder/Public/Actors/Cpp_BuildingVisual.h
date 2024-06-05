@@ -62,7 +62,7 @@ struct FBuildIndexSockets {
 };
 
 USTRUCT(BlueprintType)
-struct FBuildSocketCheck {
+struct FInstanceSocketCheck {
 	GENERATED_BODY()
 
 	UInstancedStaticMeshComponent* InstancedComponent;

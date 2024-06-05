@@ -30,6 +30,15 @@ void ACpp_Building_Base::BeginPlay() {
 	MeshInstanceSockets = FoundationInstancedMesh->GetAllSocketNames();
 	MeshInstanceSockets.Append(WallInstancedMesh->GetAllSocketNames());
 	MeshInstanceSockets.Append(CeilingInstancedMesh->GetAllSocketNames());
+
+	FInstanceSocketCheck InstanceSocket;
+	// Add all the instanced mesh components to the InstanceSocketCheck array
+	InstanceSocket.InstancedComponent = FoundationInstancedMesh;
+	InstanceSocketCheck.Add(InstanceSocket);
+	InstanceSocket.InstancedComponent = WallInstancedMesh;
+	InstanceSocketCheck.Add(InstanceSocket);
+	InstanceSocket.InstancedComponent = CeilingInstancedMesh;
+	InstanceSocketCheck.Add(InstanceSocket);
 }
 
 bool ACpp_Building_Base::IsValidSocket(UInstancedStaticMeshComponent* HitComp, const FName Filter, const FName& SocketName) {
