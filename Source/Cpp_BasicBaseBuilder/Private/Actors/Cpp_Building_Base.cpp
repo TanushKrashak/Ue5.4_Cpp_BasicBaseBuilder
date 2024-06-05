@@ -67,7 +67,7 @@ bool ACpp_Building_Base::IsValidSocket(UInstancedStaticMeshComponent* HitComp, i
 			for (const FBuildIndexSockets& IndexSockets : InstanceSocket.InstanceSocketInformation) {				
 				if (IndexSockets.Index == Index) {
 					for (const FSocketInformation& SocketInformation : IndexSockets.SocketsInformation) {
-						if (SocketInformation.SocketName == SocketName.ToString() && SocketInformation.bSocketInUse) {
+						if (SocketInformation.SocketName == SocketName && SocketInformation.bSocketInUse) {
 							bSuccess = false;
 							return bSuccess;							
 						}
@@ -191,7 +191,7 @@ void ACpp_Building_Base::AddInstance(const FBuildingSocketData& BuildingSocketDa
 				if (IndexSockets.Index == BuildingSocketData.Index) {
 					bFoundMatch = true;
 					for (FSocketInformation& SocketInformation : IndexSockets.SocketsInformation) {
-						if (SocketInformation.SocketName == BuildingSocketData.SocketName.ToString()) {
+						if (SocketInformation.SocketName == BuildingSocketData.SocketName) {
 							SocketInformation.bSocketInUse = true;
 							break;
 						}
@@ -203,9 +203,11 @@ void ACpp_Building_Base::AddInstance(const FBuildingSocketData& BuildingSocketDa
 				FBuildIndexSockets BuildIndexSockets;
 				BuildIndexSockets.Index = BuildingSocketData.Index;
 
+				// This adds all the socket information to the BuildIndexSockets showing which sockets are in use
 				FSocketInformation SocketInformation;
 				for (const FName& socketName : InstanceSocket.InstancedComponent->GetAllSocketNames()) {
-					SocketInformation.SocketName = socketName.ToString();
+					SocketInformation.bSocketInUse = false;
+					SocketInformation.SocketName = socketName;
 					if (socketName == BuildingSocketData.SocketName) {
 						SocketInformation.bSocketInUse = true;
 					}
