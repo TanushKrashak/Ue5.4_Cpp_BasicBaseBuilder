@@ -12,6 +12,7 @@ class UStaticMeshComponent;
 class ACpp_Building_Base;
 class UStaticMesh;
 class UMaterialInstance;
+class UInstancedStaticMeshComponent;
 
 UENUM(BlueprintType)
 enum class EBuildType : uint8 {
@@ -38,10 +39,35 @@ USTRUCT(BlueprintType)
 struct FBuildingSocketData {
 	GENERATED_BODY()
 	
-	class UInstancedStaticMeshComponent* InstancedComponent;	
+	UInstancedStaticMeshComponent* InstancedComponent;	
 	int32 Index;	
 	FName SocketName;
 	FTransform SocketTransform;
+};
+
+USTRUCT(BlueprintType)
+struct FSocketInformation {
+	GENERATED_BODY()
+
+	FString SocketName;
+	bool bSocketInUse = false;
+};
+
+
+USTRUCT(BlueprintType)
+//struct FBuildIndexSockets {
+	GENERATED_BODY()
+
+	int32 Index;
+	TArray<FSocketInformation> SocketsInformation;
+};
+
+USTRUCT(BlueprintType)
+struct FBuildSocketCheck {
+	GENERATED_BODY()
+
+	UInstancedStaticMeshComponent* InstancedComponent;
+
 };
 
 UCLASS()
