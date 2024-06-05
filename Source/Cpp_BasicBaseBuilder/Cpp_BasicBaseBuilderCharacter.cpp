@@ -172,7 +172,7 @@ void ACpp_BasicBaseBuilderCharacter::SpawnBuilding() {
 }
 void ACpp_BasicBaseBuilderCharacter::DestroyBuildingInstance() {
 	if (bInBuildMode && Builder) {
-		Builder->DestroyInstance();
+		Builder->DestroyInstance(PerformLineTrace());
 	}
 }
 void ACpp_BasicBaseBuilderCharacter::CycleBuildingMeshThing() {

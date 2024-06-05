@@ -4,6 +4,7 @@
 #include "Actors/Cpp_BuildingVisual.h"
 #include "Components/StaticMeshComponent.h"
 #include "Actors/Cpp_Building_Base.h"
+#include "Components/InstancedStaticMeshComponent.h"
 
 
 
