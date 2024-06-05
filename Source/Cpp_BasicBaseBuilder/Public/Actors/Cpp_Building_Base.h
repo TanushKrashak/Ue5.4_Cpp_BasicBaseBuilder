@@ -34,7 +34,7 @@ protected:
 
 	TArray<FName> MeshInstanceSockets;
 
-	TArray<FInstanceSocketCheck> InstanceSocketCheck;
+	TArray<FInstanceSocketCheck> InstanceSocketsCheck;
 
 	//====================================================================================================================
 	// FUNCTIONS

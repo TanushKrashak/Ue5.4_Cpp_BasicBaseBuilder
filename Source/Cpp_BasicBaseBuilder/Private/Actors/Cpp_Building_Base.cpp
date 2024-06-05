@@ -22,6 +22,15 @@ ACpp_Building_Base::ACpp_Building_Base() {
 void ACpp_Building_Base::BeginPlay() {
 	Super::BeginPlay();
 
+	FInstanceSocketCheck InstanceSocket;
+	// Add all the instanced mesh components to the InstanceSocketsCheck array
+	InstanceSocket.InstancedComponent = FoundationInstancedMesh;
+	InstanceSocketsCheck.Add(InstanceSocket);
+	InstanceSocket.InstancedComponent = WallInstancedMesh;
+	InstanceSocketsCheck.Add(InstanceSocket);
+	InstanceSocket.InstancedComponent = CeilingInstancedMesh;
+	InstanceSocketsCheck.Add(InstanceSocket);
+
 	FBuildingSocketData BuildingSocketData;
 	BuildingSocketData.InstancedComponent = FoundationInstancedMesh;
 	BuildingSocketData.Index = 0;
@@ -37,14 +46,6 @@ void ACpp_Building_Base::BeginPlay() {
 	MeshInstanceSockets.Append(WallInstancedMesh->GetAllSocketNames());
 	MeshInstanceSockets.Append(CeilingInstancedMesh->GetAllSocketNames());
 
-	FInstanceSocketCheck InstanceSocket;
-	// Add all the instanced mesh components to the InstanceSocketCheck array
-	InstanceSocket.InstancedComponent = FoundationInstancedMesh;
-	InstanceSocketCheck.Add(InstanceSocket);
-	InstanceSocket.InstancedComponent = WallInstancedMesh;
-	InstanceSocketCheck.Add(InstanceSocket);
-	InstanceSocket.InstancedComponent = CeilingInstancedMesh;
-	InstanceSocketCheck.Add(InstanceSocket);
 }
 
 bool ACpp_Building_Base::IsValidSocket(UInstancedStaticMeshComponent* HitComp, const FName Filter, const FName& SocketName) {
@@ -162,6 +163,42 @@ FBuildingSocketData ACpp_Building_Base::GetHitSocketTransform(const FHitResult& 
 }
 
 void ACpp_Building_Base::AddInstance(const FBuildingSocketData& BuildingSocketData, EBuildType BuildType) {
+	
+	for (FInstanceSocketCheck& InstanceSocket : InstanceSocketsCheck) {
+		// checking both have the same instanced component to check if the socket is already in use
+		if (InstanceSocket.InstancedComponent == BuildingSocketData.InstancedComponent) {
+			
+			bool bFoundMatch = false;
+			for (FBuildIndexSockets& IndexSockets : InstanceSocket.InstanceSocketInformation) {
+				if (IndexSockets.Index == BuildingSocketData.Index) {
+					bFoundMatch = true;
+					for (FSocketInformation& SocketInformation : IndexSockets.SocketsInformation) {
+						if (SocketInformation.SocketName == BuildingSocketData.SocketName.ToString()) {
+							SocketInformation.bSocketInUse = true;
+							break;
+						}
+					}
+					break;
+				}
+			}
+			if (!bFoundMatch) {
+				FBuildIndexSockets BuildIndexSockets;
+				BuildIndexSockets.Index = BuildingSocketData.Index;
+
+				FSocketInformation SocketInformation;
+				for (const FName& socketName : InstanceSocket.InstancedComponent->GetAllSocketNames()) {
+					SocketInformation.SocketName = socketName.ToString();
+					if (socketName == BuildingSocketData.SocketName) {
+						SocketInformation.bSocketInUse = true;
+					}
+					BuildIndexSockets.SocketsInformation.Add(SocketInformation);
+				}
+				InstanceSocket.InstanceSocketInformation.Add(BuildIndexSockets);
+			}
+		}
+
+			
+	}
 
 	switch (BuildType) {
 		case EBuildType::Foundation:
