@@ -5,7 +5,7 @@
 #include "Components/InstancedStaticMeshComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "DrawDebugHelpers.h"
-#include "Actors/Cpp_BuildingVisual.h"
+
 
 
 ACpp_Building_Base::ACpp_Building_Base() {
@@ -116,7 +116,8 @@ FTransform ACpp_Building_Base::GetInstancedSocketTransform(UInstancedStaticMeshC
 int32 ACpp_Building_Base::GetHitIndex(const FHitResult& HitResult) {
 	return HitResult.Item;
 }
-FBuildingSocketData ACpp_Building_Base::GetHitSocketTransform(const FHitResult& HitResult, const FName& Filter, float ValidHitDistance /*= 100.0f*/) {
+
+FBuildingSocketData ACpp_Building_Base::GetHitSocketTransform(const FHitResult& HitResult, const FName& Filter, float ValidHitDistance) {
 
 	// Create a new instance of the FBuildingSocketData struct which will hold the socket data
 	FBuildingSocketData SocketData = FBuildingSocketData();
@@ -124,10 +125,12 @@ FBuildingSocketData ACpp_Building_Base::GetHitSocketTransform(const FHitResult& 
 	if (UInstancedStaticMeshComponent* HitComp = Cast<UInstancedStaticMeshComponent>(HitResult.GetComponent())) {
 		int32 HitIndex = GetHitIndex(HitResult);
 		if (HitIndex != -1) {
-			
+			// Loop through all the socket names of the instanced mesh component
 			for (const FName& SocketName : MeshInstanceSockets) {
+				// Check if the socket is valid
 				if (IsValidSocket(HitComp, Filter, SocketName)) {
 					FTransform SocketTransform = GetInstancedSocketTransform(HitComp, HitIndex, SocketName);
+					// if distance is <= ValidHitDistance, set the socket data and return it
 					if (FVector::Distance(SocketTransform.GetLocation(), HitResult.Location) <= ValidHitDistance) {
 						SocketData.Index = HitIndex;
 						SocketData.InstancedComponent = HitComp;
@@ -147,7 +150,7 @@ void ACpp_Building_Base::AddInstance(const FBuildingSocketData& BuildingSocketDa
 	if (BuildingSocketData.InstancedComponent) {
 		BuildingSocketData.InstancedComponent->AddInstance(BuildingSocketData.SocketTransform, true);
 	}
-
+	return;
 	// OLD CODE (KEEPING FOR REFERENCE)
 	/*
 	switch (BuildType) {

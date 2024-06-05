@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Actors/Cpp_BuildingVisual.h"
 #include "Cpp_Building_Base.generated.h"
 
 // Forward Declarations
@@ -56,8 +57,9 @@ public:
 	FTransform GetInstancedSocketTransform(UInstancedStaticMeshComponent* InstancedComp, int32 InstanceIndex, const FName& SocketName);
 
 	int32 GetHitIndex(const FHitResult& HitResult);
+
 	FBuildingSocketData GetHitSocketTransform(const FHitResult& HitResult, const FName& Filter, float ValidHitDistance = 100.0f);
-	
+
 	void AddInstance(const FBuildingSocketData& BuildingSocketData);
 };
 
