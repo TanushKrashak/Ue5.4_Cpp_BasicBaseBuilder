@@ -59,6 +59,10 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* BuildAction;
 
+	/** Destroy Build Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* DestroyBuildingAction;
+
 	UPROPERTY(BlueprintReadOnly, Category = "Building")
 	bool bInBuildMode;
 
