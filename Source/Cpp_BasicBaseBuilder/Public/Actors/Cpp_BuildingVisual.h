@@ -55,7 +55,7 @@ struct FSocketInformation {
 
 
 USTRUCT(BlueprintType)
-//struct FBuildIndexSockets {
+struct FBuildIndexSockets {
 	GENERATED_BODY()
 
 	int32 Index;
