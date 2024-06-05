@@ -53,7 +53,6 @@ struct FSocketInformation {
 	bool bSocketInUse = false;
 };
 
-
 USTRUCT(BlueprintType)
 struct FBuildIndexSockets {
 	GENERATED_BODY()
@@ -67,7 +66,7 @@ struct FBuildSocketCheck {
 	GENERATED_BODY()
 
 	UInstancedStaticMeshComponent* InstancedComponent;
-
+	TArray<FBuildIndexSockets> InstanceSocketInformation;
 };
 
 UCLASS()
