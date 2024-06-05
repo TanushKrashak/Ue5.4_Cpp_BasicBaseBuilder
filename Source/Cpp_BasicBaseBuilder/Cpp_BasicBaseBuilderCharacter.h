@@ -104,6 +104,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Building")
 	void SpawnBuilding();
 	UFUNCTION(BlueprintCallable, Category = "Building")
+	void DestroyBuildingInstance();
+	UFUNCTION(BlueprintCallable, Category = "Building")
 	void CycleBuildingMeshThing();
 
 };
