@@ -76,6 +76,7 @@ protected:
 	bool bReturnedMesh;
 
 	ACpp_Building_Base* InteractingBuilding;
+	FBuildingSocketData SocketData;
 
 	//====================================================================================================================
 	// FUNCTIONS

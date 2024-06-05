@@ -129,8 +129,11 @@ FBuildingSocketData ACpp_Building_Base::GetHitSocketTransform(const FHitResult& 
 				if (IsValidSocket(HitComp, Filter, SocketName)) {
 					FTransform SocketTransform = GetInstancedSocketTransform(HitComp, HitIndex, SocketName);
 					if (FVector::Distance(SocketTransform.GetLocation(), HitResult.Location) <= ValidHitDistance) {
-
-						return SocketTransform;
+						SocketData.Index = HitIndex;
+						SocketData.InstancedComponent = HitComp;
+						SocketData.SocketName = SocketName;
+						SocketData.SocketTransform = SocketTransform;
+						return SocketData;
 					}
 				}
 			}

@@ -69,10 +69,10 @@ void ACpp_BuildingVisual::SetBuildPosition(const FHitResult HitResult) {
 				ReturnMeshToSelected();		
 			}
 			
-			FTransform SocketTransform = InteractingBuilding->GetHitSocketTransform(HitResult, BuildTypes[BuildingTypeIndex].FilterCharacter, 25.0f);
+			SocketData = InteractingBuilding->GetHitSocketTransform(HitResult, BuildTypes[BuildingTypeIndex].FilterCharacter, 25.0f);
 			// If socket transform was changed
-			if (!SocketTransform.Equals(FTransform())) {
-				SetActorTransform(SocketTransform);
+			if (!SocketData.SocketTransform.Equals(FTransform())) {
+				SetActorTransform(SocketData.SocketTransform);
 				// Set the material to the true material
 				if (MaterialTrue && !bMaterialIsTrue) {
 					bMaterialIsTrue = true;
