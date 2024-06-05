@@ -21,8 +21,14 @@ ACpp_Building_Base::ACpp_Building_Base() {
 
 void ACpp_Building_Base::BeginPlay() {
 	Super::BeginPlay();
-	// Spawn the building at the location of the actor
-	FoundationInstancedMesh->AddInstance(FTransform());
+
+	FBuildingSocketData BuildingSocketData;
+	BuildingSocketData.InstancedComponent = FoundationInstancedMesh;
+	BuildingSocketData.Index = 0;
+	BuildingSocketData.SocketName = NAME_None;
+	BuildingSocketData.SocketTransform = FTransform();
+	AddInstance(BuildingSocketData, EBuildType::Foundation);
+
 	// Set its transform to the actor's transform
 	FoundationInstancedMesh->SetWorldTransform(GetActorTransform());
 	
