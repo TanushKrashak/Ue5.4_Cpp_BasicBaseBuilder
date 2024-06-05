@@ -168,6 +168,11 @@ void ACpp_BasicBaseBuilderCharacter::SpawnBuilding() {
 		Builder->SpawnBuilding();
 	}
 }
+void ACpp_BasicBaseBuilderCharacter::DestroyBuildingInstance() {
+	if (bInBuildMode && Builder) {
+		Builder->DestroyInstance();
+	}
+}
 void ACpp_BasicBaseBuilderCharacter::CycleBuildingMeshThing() {
 	if (Builder && bInBuildMode) {
 		Builder->CycleMesh();
