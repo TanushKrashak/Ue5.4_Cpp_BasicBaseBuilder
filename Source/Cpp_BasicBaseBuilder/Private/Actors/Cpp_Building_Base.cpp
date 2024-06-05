@@ -48,7 +48,7 @@ void ACpp_Building_Base::BeginPlay() {
 
 }
 
-bool ACpp_Building_Base::IsValidSocket(UInstancedStaticMeshComponent* HitComp, const FName Filter, const FName& SocketName) {
+bool ACpp_Building_Base::IsValidSocket(UInstancedStaticMeshComponent* HitComp, int32 Index, const FName Filter, const FName& SocketName) {
 	bool bSuccess = true;
 	if (!HitComp->DoesSocketExist(SocketName)) {
 		bSuccess = false;
@@ -59,6 +59,24 @@ bool ACpp_Building_Base::IsValidSocket(UInstancedStaticMeshComponent* HitComp, c
 		bSuccess = false;
 		return bSuccess;
 	}
+	// Check if the socket is already in use, first loop through all the InstanceSockets
+	for (FInstanceSocketCheck& InstanceSocket : InstanceSocketsCheck) {
+		// Check if the instanced component is the same as the hit component
+		if (InstanceSocket.InstancedComponent == HitComp) {
+			// Loop through all the InstanceSocketInformation then check if index is the same as the hit index
+			for (const FBuildIndexSockets& IndexSockets : InstanceSocket.InstanceSocketInformation) {				
+				if (IndexSockets.Index == Index) {
+					for (const FSocketInformation& SocketInformation : IndexSockets.SocketsInformation) {
+						if (SocketInformation.SocketName == SocketName.ToString() && SocketInformation.bSocketInUse) {
+							bSuccess = false;
+							return bSuccess;							
+						}
+					} 
+				}
+			}
+		}
+	}
+
 	return true;
 }
 
@@ -144,7 +162,7 @@ FBuildingSocketData ACpp_Building_Base::GetHitSocketTransform(const FHitResult& 
 			// Loop through all the socket names of the instanced mesh component
 			for (const FName& SocketName : MeshInstanceSockets) {
 				// Check if the socket is valid
-				if (IsValidSocket(HitComp, Filter, SocketName)) {
+				if (IsValidSocket(HitComp, HitIndex, Filter, SocketName)) {
 					FTransform SocketTransform = GetInstancedSocketTransform(HitComp, HitIndex, SocketName);
 					// if distance is <= ValidHitDistance, set the socket data and return it
 					if (FVector::Distance(SocketTransform.GetLocation(), HitResult.Location) <= ValidHitDistance) {
