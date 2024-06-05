@@ -114,7 +114,11 @@ void ACpp_BuildingVisual::SpawnBuilding() {
 		}		
 	}
 }	
-
+void ACpp_BuildingVisual::DestroyInstance() {
+	if (InteractingBuilding) {
+		InteractingBuilding->DestroyInstance(SocketData);
+	}
+}
 void ACpp_BuildingVisual::CycleMesh() {
 	if (bReturnedMesh) {
 		if (++BuildingTypeIndex >= BuildTypes.Num()) {
