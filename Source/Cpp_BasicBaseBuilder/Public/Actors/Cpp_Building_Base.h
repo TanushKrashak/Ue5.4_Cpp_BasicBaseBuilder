@@ -56,7 +56,7 @@ public:
 	FTransform GetInstancedSocketTransform(UInstancedStaticMeshComponent* InstancedComp, int32 InstanceIndex, const FName& SocketName);
 
 	int32 GetHitIndex(const FHitResult& HitResult);
-	FTransform GetHitSocketTransform(const FHitResult& HitResult, const FName& Filter, float ValidHitDistance = 100.0f);
+	FBuildingSocketData GetHitSocketTransform(const FHitResult& HitResult, const FName& Filter, float ValidHitDistance = 100.0f);
 	
 	void AddInstance(const FTransform ActorTransform, EBuildType BuildType);
 };

@@ -116,11 +116,15 @@ FTransform ACpp_Building_Base::GetInstancedSocketTransform(UInstancedStaticMeshC
 int32 ACpp_Building_Base::GetHitIndex(const FHitResult& HitResult) {
 	return HitResult.Item;
 }
+FBuildingSocketData ACpp_Building_Base::GetHitSocketTransform(const FHitResult& HitResult, const FName& Filter, float ValidHitDistance /*= 100.0f*/) {
 
-FTransform ACpp_Building_Base::GetHitSocketTransform(const FHitResult& HitResult, const FName& Filter, float ValidHitDistance /*= 100.0f*/) {
+	// Create a new instance of the FBuildingSocketData struct which will hold the socket data
+	FBuildingSocketData SocketData = FBuildingSocketData();
+
 	if (UInstancedStaticMeshComponent* HitComp = Cast<UInstancedStaticMeshComponent>(HitResult.GetComponent())) {
 		int32 HitIndex = GetHitIndex(HitResult);
 		if (HitIndex != -1) {
+			
 			for (const FName& SocketName : MeshInstanceSockets) {
 				if (IsValidSocket(HitComp, Filter, SocketName)) {
 					FTransform SocketTransform = GetInstancedSocketTransform(HitComp, HitIndex, SocketName);
@@ -133,7 +137,7 @@ FTransform ACpp_Building_Base::GetHitSocketTransform(const FHitResult& HitResult
 
 		}
 	}
-	return FTransform();
+	return SocketData;
 }
 
 void ACpp_Building_Base::AddInstance(const FTransform ActorTransform, EBuildType BuildType) {
